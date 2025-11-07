@@ -160,6 +160,92 @@ result = client.analyzertoggle(mode=False)
 }
 ```
 
+#### Margin Calculator
+Calculate margin requirements for single or multiple positions (basket margin).
+```python
+# Single stock margin calculation
+result = client.margin(positions=[{
+    "symbol": "SBIN",
+    "exchange": "NSE",
+    "action": "BUY",
+    "product": "MIS",
+    "pricetype": "LIMIT",
+    "quantity": "10",
+    "price": "750.50"
+}])
+
+# Returns:
+{
+    "status": "success",
+    "data": {
+        "total_margin_required": 7505.00,
+        "span_margin": 0.00,        # Available for derivatives
+        "exposure_margin": 0.00     # Available for derivatives
+    }
+}
+
+# Options spread with margin benefit
+result = client.margin(positions=[
+    {
+        "symbol": "NIFTY30DEC2526000CE",
+        "exchange": "NFO",
+        "action": "SELL",
+        "product": "NRML",
+        "pricetype": "LIMIT",
+        "quantity": "75",
+        "price": "150.00"
+    },
+    {
+        "symbol": "NIFTY30DEC2526000PE",
+        "exchange": "NFO",
+        "action": "SELL",
+        "product": "NRML",
+        "pricetype": "LIMIT",
+        "quantity": "75",
+        "price": "125.00"
+    }
+])
+# Returns reduced margin due to hedging benefit
+
+# Iron Condor strategy (4 legs)
+result = client.margin(positions=[
+    {"symbol": "NIFTY30DEC2526500CE", "exchange": "NFO", "action": "SELL",
+     "product": "NRML", "pricetype": "LIMIT", "quantity": "75", "price": "50"},
+    {"symbol": "NIFTY30DEC2527000CE", "exchange": "NFO", "action": "BUY",
+     "product": "NRML", "pricetype": "LIMIT", "quantity": "75", "price": "25"},
+    {"symbol": "NIFTY30DEC2525500PE", "exchange": "NFO", "action": "SELL",
+     "product": "NRML", "pricetype": "LIMIT", "quantity": "75", "price": "45"},
+    {"symbol": "NIFTY30DEC2525000PE", "exchange": "NFO", "action": "BUY",
+     "product": "NRML", "pricetype": "LIMIT", "quantity": "75", "price": "20"}
+])
+
+# Futures margin
+result = client.margin(positions=[{
+    "symbol": "NIFTY30DEC25FUT",
+    "exchange": "NFO",
+    "action": "BUY",
+    "product": "NRML",
+    "pricetype": "MARKET",
+    "quantity": "75"
+}])
+```
+
+**Supported Parameters:**
+- Maximum 50 positions per request
+- Exchanges: NSE, BSE, NFO, BFO, CDS, MCX
+- Products: CNC (delivery), MIS (intraday), NRML (F&O carry forward)
+- Price types: MARKET, LIMIT, SL, SL-M
+- For MARKET orders, price can be "0" or omitted
+- For LIMIT orders, price is required
+- For SL/SL-M orders, trigger_price is required
+
+**Broker-Specific Behavior:**
+- Angel One: Supports batch margin up to 50 positions
+- Zerodha: Uses basket API for multiple positions
+- Dhan/Firstock/Kotak/Paytm: Single position only, aggregated for multiple
+- Groww: Basket margin only for FNO segment
+- 5paisa: Returns account-level margin
+
 ### 3. Orders API
 
 #### Place Order
@@ -899,6 +985,7 @@ if daily_loss >= max_loss_limit:
 
 Check the examples directory for detailed usage:
 - account_test.py: Test account-related functions
+- margin_example.py: Test margin calculation for single and multiple positions
 - order_test.py: Test order management functions
 - data_examples.py: Test market data functions
 - feed_examples.py: Test WebSocket LTP feeds

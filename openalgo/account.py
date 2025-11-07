@@ -5,6 +5,7 @@ OpenAlgo REST API Documentation - Account Methods
 """
 
 import httpx
+from typing import List, Dict, Any, Optional, Union
 from .base import BaseAPI
 
 class AccountAPI(BaseAPI):
@@ -273,3 +274,135 @@ class AccountAPI(BaseAPI):
             "mode": mode
         }
         return self._make_request("analyzer/toggle", payload)
+
+    def margin(self, *, positions: List[Dict[str, Union[str, int, float]]]) -> Dict[str, Any]:
+        """
+        Calculate margin requirements for a basket of positions.
+
+        This function calculates the total margin required for one or multiple positions,
+        taking into account broker-specific margin benefits for hedged positions.
+
+        Parameters:
+        - positions (list): List of position dictionaries (max: 50 positions). Required.
+            Each position dictionary must contain:
+                - symbol (str): Trading symbol (e.g., "SBIN", "NIFTY30DEC2526000CE"). Required.
+                - exchange (str): Exchange code (NSE/BSE/NFO/BFO/CDS/MCX). Required.
+                - action (str): BUY or SELL. Required.
+                - product (str): Product type (CNC/MIS/NRML). Required.
+                - pricetype (str): Price type (MARKET/LIMIT/SL/SL-M). Required.
+                - quantity (str/int): Quantity to trade. Required.
+                - price (str/float, optional): Price for LIMIT orders. Defaults to "0".
+                - trigger_price (str/float, optional): Trigger price for SL/SL-M orders. Defaults to "0".
+
+        Returns:
+        dict: JSON response containing margin data with format:
+            Success:
+            {
+                "status": "success",
+                "data": {
+                    "total_margin_required": 328482.00,
+                    "span_margin": 258482.00,      # Available for most brokers
+                    "exposure_margin": 70000.00    # Available for most brokers
+                }
+            }
+
+            Error:
+            {
+                "status": "error",
+                "message": "Error description"
+            }
+
+        Examples:
+        >>> # Single position margin
+        >>> client.margin(positions=[{
+        ...     "symbol": "SBIN",
+        ...     "exchange": "NSE",
+        ...     "action": "BUY",
+        ...     "product": "MIS",
+        ...     "pricetype": "LIMIT",
+        ...     "quantity": "10",
+        ...     "price": "750.50"
+        ... }])
+
+        >>> # Multiple positions (basket margin)
+        >>> client.margin(positions=[
+        ...     {
+        ...         "symbol": "NIFTY30DEC2526000CE",
+        ...         "exchange": "NFO",
+        ...         "action": "SELL",
+        ...         "product": "NRML",
+        ...         "pricetype": "LIMIT",
+        ...         "quantity": "75",
+        ...         "price": "150.75"
+        ...     },
+        ...     {
+        ...         "symbol": "NIFTY30DEC2526000PE",
+        ...         "exchange": "NFO",
+        ...         "action": "SELL",
+        ...         "product": "NRML",
+        ...         "pricetype": "LIMIT",
+        ...         "quantity": "75",
+        ...         "price": "125.50"
+        ...     }
+        ... ])
+
+        Notes:
+        - Maximum 50 positions allowed per request
+        - Basket margin calculation may provide margin benefit for hedged positions
+        - Broker-specific behavior varies:
+            * Angel One: Supports batch margin for up to 50 positions
+            * Zerodha: Uses basket API for multiple positions
+            * Dhan/Firstock/Kotak/Paytm: Single position only, aggregated for multiple
+            * Groww: Basket margin only for FNO segment
+            * 5paisa: Returns account-level margin
+        - For MARKET orders, price can be "0"
+        - For LIMIT orders, price is required
+        - For SL/SL-M orders, trigger_price is required
+        """
+        # Validate positions parameter
+        if not isinstance(positions, list):
+            return {
+                'status': 'error',
+                'message': 'Positions must be an array',
+                'error_type': 'validation_error'
+            }
+
+        if len(positions) == 0:
+            return {
+                'status': 'error',
+                'message': 'Positions array cannot be empty',
+                'error_type': 'validation_error'
+            }
+
+        if len(positions) > 50:
+            return {
+                'status': 'error',
+                'message': 'Maximum 50 positions allowed',
+                'error_type': 'validation_error'
+            }
+
+        # Process positions to ensure all numeric values are strings
+        processed_positions = []
+        for position in positions:
+            processed_position = {}
+            for key, value in position.items():
+                # Convert numeric values to strings
+                if key in ['quantity', 'price', 'trigger_price'] and value is not None:
+                    processed_position[key] = str(value)
+                else:
+                    processed_position[key] = value
+
+            # Set defaults for optional parameters if not provided
+            if 'price' not in processed_position:
+                processed_position['price'] = "0"
+            if 'trigger_price' not in processed_position:
+                processed_position['trigger_price'] = "0"
+
+            processed_positions.append(processed_position)
+
+        payload = {
+            "apikey": self.api_key,
+            "positions": processed_positions
+        }
+
+        return self._make_request("margin", payload)
