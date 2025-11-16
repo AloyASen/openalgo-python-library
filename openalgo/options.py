@@ -5,6 +5,7 @@ OpenAlgo REST API Documentation - Options Methods
 """
 
 import httpx
+import warnings
 from .base import BaseAPI
 
 class OptionsAPI(BaseAPI):
@@ -164,7 +165,7 @@ class OptionsAPI(BaseAPI):
 
         return self._make_request("optiongreeks", payload)
 
-    def optionsorder(self, *, strategy="Python", underlying, exchange, strike_int, offset, option_type, action, quantity, expiry_date=None, price_type="MARKET", product="MIS", **kwargs):
+    def optionsorder(self, *, strategy="Python", underlying, exchange, strike_int=None, offset, option_type, action, quantity, expiry_date=None, price_type="MARKET", product="MIS", **kwargs):
         """
         Place Option Orders by Auto-Resolving Symbol based on Underlying and Offset.
 
@@ -172,7 +173,8 @@ class OptionsAPI(BaseAPI):
         - strategy (str, optional): Strategy name. Defaults to "Python".
         - underlying (str): Underlying symbol (e.g., NIFTY, BANKNIFTY, NIFTY28OCT25FUT). Required.
         - exchange (str): Exchange code (NSE_INDEX, NSE, NFO, BSE_INDEX, BSE, BFO). Required.
-        - strike_int (int): Strike interval (50 for NIFTY, 100 for BANKNIFTY). Required.
+        - strike_int (int, optional): DEPRECATED - Will be removed in future versions.
+                                     Strike interval (50 for NIFTY, 100 for BANKNIFTY).
         - offset (str): Strike offset (ATM, ITM1-ITM50, OTM1-OTM50). Required.
         - option_type (str): Option type (CE for Call, PE for Put). Required.
         - action (str): BUY or SELL. Required.
@@ -240,12 +242,19 @@ class OptionsAPI(BaseAPI):
                 price="50.0"
             )
         """
+        # Deprecation warning for strike_int
+        if strike_int is not None:
+            warnings.warn(
+                "The 'strike_int' parameter is deprecated and will be removed in future versions.",
+                DeprecationWarning,
+                stacklevel=2
+            )
+
         payload = {
             "apikey": self.api_key,
             "strategy": strategy,
             "underlying": underlying,
             "exchange": exchange,
-            "strike_int": str(strike_int),
             "offset": offset,
             "option_type": option_type,
             "action": action,
@@ -253,6 +262,10 @@ class OptionsAPI(BaseAPI):
             "pricetype": price_type,
             "product": product
         }
+
+        # Add strike_int if provided (deprecated)
+        if strike_int is not None:
+            payload["strike_int"] = str(strike_int)
 
         # Add expiry_date if provided
         if expiry_date is not None:
@@ -265,7 +278,7 @@ class OptionsAPI(BaseAPI):
 
         return self._make_request("optionsorder", payload)
 
-    def optionsymbol(self, *, strategy="Python", underlying, exchange, strike_int, offset, option_type, expiry_date=None):
+    def optionsymbol(self, *, strategy=None, underlying, exchange, strike_int=None, offset, option_type, expiry_date=None):
         """
         Returns Option Symbol Details based on Underlying and Offset.
 
@@ -277,10 +290,12 @@ class OptionsAPI(BaseAPI):
         - Getting current ATM strike
 
         Parameters:
-        - strategy (str, optional): Strategy name. Defaults to "Python".
+        - strategy (str, optional): DEPRECATED - Will be removed in future versions.
+                                   Strategy name. Defaults to None.
         - underlying (str): Underlying symbol (e.g., NIFTY, BANKNIFTY, NIFTY28OCT25FUT). Required.
         - exchange (str): Exchange code (NSE_INDEX, NSE, NFO, BSE_INDEX, BSE, BFO). Required.
-        - strike_int (int): Strike interval (50 for NIFTY, 100 for BANKNIFTY). Required.
+        - strike_int (int, optional): DEPRECATED - Will be removed in future versions.
+                                     Strike interval (50 for NIFTY, 100 for BANKNIFTY).
         - offset (str): Strike offset (ATM, ITM1-ITM50, OTM1-OTM50). Required.
         - option_type (str): Option type (CE for Call, PE for Put). Required.
         - expiry_date (str, optional): Expiry date in DDMMMYY format (e.g., 28OCT25).
@@ -328,15 +343,36 @@ class OptionsAPI(BaseAPI):
                 option_type="CE"
             )
         """
+        # Deprecation warnings
+        if strategy is not None:
+            warnings.warn(
+                "The 'strategy' parameter is deprecated and will be removed in future versions.",
+                DeprecationWarning,
+                stacklevel=2
+            )
+
+        if strike_int is not None:
+            warnings.warn(
+                "The 'strike_int' parameter is deprecated and will be removed in future versions.",
+                DeprecationWarning,
+                stacklevel=2
+            )
+
         payload = {
             "apikey": self.api_key,
-            "strategy": strategy,
             "underlying": underlying,
             "exchange": exchange,
-            "strike_int": str(strike_int),
             "offset": offset,
             "option_type": option_type
         }
+
+        # Add strategy if provided (deprecated)
+        if strategy is not None:
+            payload["strategy"] = strategy
+
+        # Add strike_int if provided (deprecated)
+        if strike_int is not None:
+            payload["strike_int"] = str(strike_int)
 
         # Add expiry_date if provided
         if expiry_date is not None:

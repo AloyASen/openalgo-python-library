@@ -5,6 +5,70 @@ All notable changes to the OpenAlgo Python Library will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.35] - 2025-01-20
+
+### ✨ New Features
+
+#### Data API Enhancements
+- **`instruments()` function**: Download all trading symbols and instruments with exchange-wise filtering
+  - Returns data as pandas DataFrame for easy analysis and manipulation
+  - Supports filtering by exchange (NSE, BSE, NFO, BFO, BCD, CDS, MCX, NSE_INDEX, BSE_INDEX)
+  - Returns comprehensive instrument details: symbol, name, token, lot size, tick size, instrument type, etc.
+  - Enables quick symbol lookup, filtering, and export capabilities
+
+- **`syntheticfuture()` function**: Calculate synthetic futures price using ATM options
+  - Implements synthetic future formula: `Strike Price + Call Premium - Put Premium`
+  - Automatically determines ATM strike from available options
+  - Useful for arbitrage opportunities and pricing verification
+  - Supports indices (NIFTY, BANKNIFTY) and equity stocks
+  - Returns underlying LTP, ATM strike, and calculated synthetic future price
+
+### 🔄 Deprecations
+
+#### Options API Parameter Changes
+- **`strike_int` parameter**: Made optional and marked for deprecation in `optionsorder()` and `optionsymbol()`
+  - Now optional with default value `None`
+  - Deprecation warning issued when parameter is used
+  - Will be removed in future versions
+
+- **`strategy` parameter**: Made optional and marked for deprecation in `optionsymbol()`
+  - Changed default from `"Python"` to `None`
+  - Deprecation warning issued when parameter is used
+  - Will be removed in future versions
+
+### 📚 Usage Examples
+
+```python
+from openalgo import api
+
+client = api(api_key="your_key", host="http://127.0.0.1:5000")
+
+# Download all NSE instruments
+nse_df = client.instruments(exchange="NSE")
+print(f"Total NSE instruments: {len(nse_df)}")
+
+# Filter for equities only
+equities = nse_df[nse_df['instrumenttype'] == 'EQ']
+
+# Calculate synthetic future price
+synthetic = client.syntheticfuture(
+    underlying="NIFTY",
+    exchange="NSE_INDEX",
+    expiry_date="28NOV25"
+)
+print(f"Synthetic Future: {synthetic['synthetic_future_price']}")
+print(f"Spot Price: {synthetic['underlying_ltp']}")
+print(f"Basis: {synthetic['synthetic_future_price'] - synthetic['underlying_ltp']}")
+```
+
+### 🛠️ Technical Improvements
+- Added proper deprecation warnings using Python's `warnings` module
+- Backward compatible - existing code continues to work with warnings
+- Enhanced documentation for new functions
+- Improved error handling for GET requests in Data API
+
+---
+
 ## [1.0.25] - 2025-01-14
 
 ### 🚀 MAJOR PERFORMANCE OPTIMIZATIONS & 100% SUCCESS RATE

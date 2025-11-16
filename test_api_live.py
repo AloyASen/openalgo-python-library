@@ -215,7 +215,7 @@ def test_margin_function():
 def main():
     """Run all tests"""
     print("\n" + "="*60)
-    print("OpenAlgo API Test Suite v1.0.34")
+    print("OpenAlgo API Test Suite v1.0.35")
     print("Testing with API Key: " + API_KEY[:10] + "..." + API_KEY[-10:])
     print("="*60)
 
