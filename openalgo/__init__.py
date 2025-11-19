@@ -31,7 +31,7 @@ class api(OrderAPI, DataAPI, AccountAPI, FeedAPI, OptionsAPI, TelegramAPI):
     """
     pass
 
-__version__ = "1.0.37"
+__version__ = "1.0.38"
 
 # Export main components for easy access
 __all__ = ['api', 'Strategy', 'ta', 'nbjit', 'prange']
