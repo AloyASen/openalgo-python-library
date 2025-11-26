@@ -17,7 +17,7 @@ class FeedAPI(BaseAPI):
     Inherits from the BaseAPI class.
     """
 
-    def __init__(self, api_key, host="http://127.0.0.1:5000", version="v1", ws_port=8765, ws_url=None):
+    def __init__(self, api_key, host="http://127.0.0.1:5000", version="v1", ws_port=8765, ws_url=None, verbose=False):
         """
         Initialize the FeedAPI object with API key and optionally a host URL, API version, and WebSocket details.
 
@@ -27,8 +27,15 @@ class FeedAPI(BaseAPI):
         - version (str): API version. Defaults to "v1".
         - ws_port (int): WebSocket server port. Defaults to 8765.
         - ws_url (str, optional): Custom WebSocket URL. If provided, this overrides host and ws_port settings.
+        - verbose (int): Logging verbosity level. Defaults to False.
+            - 0 or False: Silent mode (errors only)
+            - 1 or True: Basic info (connection, auth, subscription status)
+            - 2: Full debug (all market data updates)
         """
         super().__init__(api_key, host, version)
+
+        # Verbosity control
+        self.verbose = int(verbose) if verbose is not False else 0
         
         # WebSocket configuration
         self.ws_port = ws_port
@@ -70,6 +77,21 @@ class FeedAPI(BaseAPI):
         self.quotes_callback = None
         self.depth_callback = None
 
+    def _log(self, level: int, category: str, message: str) -> None:
+        """
+        Internal logging method with verbosity control.
+
+        Args:
+            level (int): Required verbosity level (1=basic, 2=debug)
+            category (str): Log category for alignment (WS, AUTH, SUB, LTP, QUOTE, DEPTH, ERROR)
+            message (str): The message to log
+        """
+        if self.verbose >= level:
+            # Fixed width category for alignment
+            cat_width = 6
+            formatted_cat = f"[{category}]".ljust(cat_width + 2)
+            print(f"{formatted_cat} {message}")
+
     def connect(self) -> bool:
         """
         Connect to the WebSocket server and authenticate.
@@ -82,15 +104,15 @@ class FeedAPI(BaseAPI):
                 self._process_message(message)
                 
             def on_error(ws, error):
-                print(f"WebSocket error: {error}")
-                
+                self._log(1, "ERROR", f"WebSocket error: {error}")
+
             def on_open(ws):
-                print(f"Connected to {self.ws_url}")
+                self._log(1, "WS", f"Connected to {self.ws_url}")
                 self.connected = True
                 self._authenticate()
-                
+
             def on_close(ws, close_status_code, close_reason):
-                print(f"Disconnected from {self.ws_url}")
+                self._log(1, "WS", f"Disconnected from {self.ws_url}")
                 self.connected = False
                 self.authenticated = False
             
@@ -115,7 +137,7 @@ class FeedAPI(BaseAPI):
                 time.sleep(0.1)
             
             if not self.connected:
-                print("Failed to connect to the WebSocket server")
+                self._log(1, "ERROR", "Failed to connect to WebSocket server")
                 return False
                 
             # Wait for authentication to complete
@@ -127,7 +149,7 @@ class FeedAPI(BaseAPI):
             return self.authenticated
             
         except Exception as e:
-            print(f"Error connecting to WebSocket: {e}")
+            self._log(1, "ERROR", f"Error connecting to WebSocket: {e}")
             return False
 
     def disconnect(self) -> None:
@@ -146,16 +168,15 @@ class FeedAPI(BaseAPI):
     def _authenticate(self) -> None:
         """Authenticate with the WebSocket server using the API key."""
         if not self.connected:
-            print("Cannot authenticate: not connected")
+            self._log(1, "ERROR", "Cannot authenticate: not connected")
             return
-            
+
         auth_msg = {
             "action": "authenticate",
             "api_key": self.api_key
         }
-        
-        # Print authentication info like the test example
-        print(f"Authenticating with API key: {self.api_key[:8]}...{self.api_key[-8:]}")
+
+        self._log(1, "AUTH", f"Authenticating with API key: {self.api_key[:8]}...{self.api_key[-8:]}")
         self.ws.send(json.dumps(auth_msg))
 
     def _process_message(self, message_str: str) -> None:
@@ -170,18 +191,27 @@ class FeedAPI(BaseAPI):
             
             # Handle authentication response
             if message.get("type") == "auth":
-                # Print full authentication response like in the test example
-                print(f"Authentication response: {message}")
                 if message.get("status") == "success":
                     self.authenticated = True
-                    print("Authentication successful!")
+                    broker = message.get("broker", "unknown")
+                    user_id = message.get("user_id", "unknown")
+                    self._log(1, "AUTH", f"Success | Broker: {broker} | User: {user_id}")
+                    self._log(2, "AUTH", f"Full response: {message}")
                 else:
-                    print(f"Authentication failed: {message}")
+                    self._log(1, "ERROR", f"Authentication failed: {message.get('message', 'Unknown error')}")
                 return
-                
+
             # Handle subscription response
             if message.get("type") == "subscribe":
-                print(f"Subscription response: {message}")
+                subs = message.get("subscriptions", [])
+                for sub in subs:
+                    sym = sub.get("symbol", "?")
+                    exch = sub.get("exchange", "?")
+                    status = sub.get("status", "?")
+                    mode = sub.get("mode", 0)
+                    mode_name = {1: "LTP", 2: "Quote", 3: "Depth"}.get(mode, "Unknown")
+                    self._log(1, "SUB", f"{exch}:{sym} | Mode: {mode_name} | Status: {status}")
+                self._log(2, "SUB", f"Full response: {message}")
                 return
                 
             # Handle market data
@@ -205,9 +235,8 @@ class FeedAPI(BaseAPI):
                                 'price': ltp,
                                 'timestamp': timestamp
                             }
-                            
-                            # Print when LTP data is received (same as test file)
-                            print(f"LTP {symbol_key}: {ltp} | Time: {timestamp}")
+
+                            self._log(2, "LTP", f"{symbol_key:<20} | LTP: {ltp}")
                         
                         # Invoke callback if set
                         if self.ltp_callback:
@@ -233,7 +262,7 @@ class FeedAPI(BaseAPI):
                                 # Pass the cleaned message to callback
                                 self.ltp_callback(clean_data)
                             except Exception as e:
-                                print(f"Error in LTP callback: {str(e)}")                 
+                                self._log(1, "ERROR", f"LTP callback error: {str(e)}")                 
                     # Handle Quotes data (mode 2)
                     elif mode == 2:
                         with self.lock:
@@ -251,11 +280,8 @@ class FeedAPI(BaseAPI):
                             # Store quote data with format 'EXCHANGE:SYMBOL'
                             symbol_key = f"{exchange}:{symbol}"
                             self.quotes_data[symbol_key] = quote_data
-                            
-                            # Print when quote data is received (same as test file)
-                            print(f"Quote {symbol_key}: Open: {quote_data['open']} | High: {quote_data['high']} | "
-                                  f"Low: {quote_data['low']} | Close: {quote_data['close']} | "
-                                  f"LTP: {quote_data['ltp']}")
+
+                            self._log(2, "QUOTE", f"{symbol_key:<20} | O: {quote_data['open']:<10} H: {quote_data['high']:<10} L: {quote_data['low']:<10} C: {quote_data['close']:<10} LTP: {quote_data['ltp']}")
                         
                         # Invoke callback if set
                         if self.quote_callback:
@@ -271,7 +297,7 @@ class FeedAPI(BaseAPI):
                                 # Pass the cleaned message to callback
                                 self.quote_callback(clean_data)
                             except Exception as e:
-                                print(f"Error in Quote callback: {str(e)}")                 
+                                self._log(1, "ERROR", f"Quote callback error: {str(e)}")                 
                     # Handle Market Depth data (mode 3)
                     elif mode == 3 and "depth" in market_data:
                         with self.lock:
@@ -285,38 +311,29 @@ class FeedAPI(BaseAPI):
                             # Store depth data with format 'EXCHANGE:SYMBOL'
                             symbol_key = f"{exchange}:{symbol}"
                             self.depth_data[symbol_key] = depth_data
-                            
-                            # Print when depth data is received
+
+                            # Log depth data
                             buy_depth = depth_data.get('depth', {}).get('buy', [])
                             sell_depth = depth_data.get('depth', {}).get('sell', [])
-                            
-                            print(f"\nDepth {symbol_key} - LTP: {depth_data.get('ltp')}")
-                            
-                            # Print buy depth summary
-                            print("\nBUY DEPTH:")
-                            print("-" * 40)
-                            print(f"{'Level':<6} {'Price':<10} {'Quantity':<10} {'Orders':<10}")
-                            print("-" * 40)
-                            
-                            if buy_depth:
-                                for i, level in enumerate(buy_depth):
-                                    print(f"{i+1:<6} {level.get('price', 'N/A'):<10} {level.get('quantity', 'N/A'):<10} {level.get('orders', 'N/A'):<10}")
-                            else:
-                                print("No buy depth data available")
-                                
-                            # Print sell depth summary
-                            print("\nSELL DEPTH:")
-                            print("-" * 40)
-                            print(f"{'Level':<6} {'Price':<10} {'Quantity':<10} {'Orders':<10}")
-                            print("-" * 40)
-                            
-                            if sell_depth:
-                                for i, level in enumerate(sell_depth):
-                                    print(f"{i+1:<6} {level.get('price', 'N/A'):<10} {level.get('quantity', 'N/A'):<10} {level.get('orders', 'N/A'):<10}")
-                            else:
-                                print("No sell depth data available")
-                                
-                            print("-" * 40)
+
+                            self._log(2, "DEPTH", f"{symbol_key:<20} | LTP: {depth_data.get('ltp')}")
+
+                            if self.verbose >= 2:
+                                # Print buy depth summary
+                                print(f"         {'BUY':<30} | {'SELL':<30}")
+                                print(f"         {'Price':<10} {'Qty':<10} {'Orders':<8} | {'Price':<10} {'Qty':<10} {'Orders':<8}")
+                                print("         " + "-" * 62)
+                                max_levels = max(len(buy_depth), len(sell_depth), 1)
+                                for i in range(max_levels):
+                                    buy_lvl = buy_depth[i] if i < len(buy_depth) else {}
+                                    sell_lvl = sell_depth[i] if i < len(sell_depth) else {}
+                                    bp = buy_lvl.get('price', '-')
+                                    bq = buy_lvl.get('quantity', '-')
+                                    bo = buy_lvl.get('orders', '-')
+                                    sp = sell_lvl.get('price', '-')
+                                    sq = sell_lvl.get('quantity', '-')
+                                    so = sell_lvl.get('orders', '-')
+                                    print(f"         {str(bp):<10} {str(bq):<10} {str(bo):<8} | {str(sp):<10} {str(sq):<10} {str(so):<8}")
                         
                         # Invoke callback if set
                         if self.depth_callback:
@@ -332,12 +349,12 @@ class FeedAPI(BaseAPI):
                                 # Pass the cleaned message to callback
                                 self.depth_callback(clean_data)
                             except Exception as e:
-                                print(f"Error in Depth callback: {str(e)}")
+                                self._log(1, "ERROR", f"Depth callback error: {str(e)}")
                         
         except json.JSONDecodeError:
-            print(f"Invalid JSON message: {message_str}")
+            self._log(1, "ERROR", f"Invalid JSON message: {message_str[:100]}...")
         except Exception as e:
-            print(f"Error handling message: {e}")
+            self._log(1, "ERROR", f"Error handling message: {e}")
 
     def subscribe_ltp(self, instruments: List[Dict[str, Any]], on_data_received: Optional[Callable] = None) -> bool:
         """
@@ -354,31 +371,31 @@ class FeedAPI(BaseAPI):
             bool: True if subscription successful, False otherwise
         """
         if not self.connected:
-            print("Not connected to WebSocket server")
+            self._log(1, "ERROR", "Not connected to WebSocket server")
             return False
-            
+
         if not self.authenticated:
-            print("Not authenticated with WebSocket server")
+            self._log(1, "ERROR", "Not authenticated with WebSocket server")
             return False
-                
+
         # Set callback if provided
         if on_data_received:
             self.ltp_callback = on_data_received
-        
+
         # Subscribe to each instrument individually (matching the working test implementation)
         for instrument in instruments:
             exchange = instrument.get("exchange")
             symbol = instrument.get("symbol")
             exchange_token = instrument.get("exchange_token")
-            
+
             # If only exchange_token is provided, we need to map it to a symbol
             if not symbol and exchange_token:
                 symbol = exchange_token
-                
+
             if not exchange or not symbol:
-                print(f"Invalid instrument: {instrument}")
+                self._log(1, "ERROR", f"Invalid instrument: {instrument}")
                 continue
-                
+
             # Use the exact same message format as the working test
             subscription_msg = {
                 "action": "subscribe",
@@ -387,52 +404,51 @@ class FeedAPI(BaseAPI):
                 "mode": 1,  # 1 for LTP
                 "depth": 5  # Default depth level
             }
-            
-            print(f"Subscribing to {exchange}:{symbol} LTP")
+
+            self._log(1, "SUB", f"Subscribing {exchange}:{symbol} LTP...")
             try:
                 self.ws.send(json.dumps(subscription_msg))
-                
+
                 # Small delay to ensure the message is processed separately (just like the test)
                 time.sleep(0.1)
             except Exception as e:
-                print(f"Error subscribing to {exchange}:{symbol}: {e}")
+                self._log(1, "ERROR", f"Error subscribing to {exchange}:{symbol}: {e}")
                 return False
-        
+
         return True
 
     def unsubscribe_ltp(self, instruments: List[Dict[str, Any]]) -> bool:
         """
         Unsubscribe from LTP updates for instruments.
-        
+
         Args:
             instruments: List of instrument dictionaries with keys:
                 - exchange (str): Exchange code (e.g., 'NSE', 'BSE', 'NFO')
                 - symbol (str): Trading symbol
                 - exchange_token (str, optional): Exchange token for the instrument
-                
+
         Returns:
             bool: True if unsubscription successful, False otherwise
         """
         if not self.connected or not self.authenticated:
             return False
-        
+
         # Unsubscribe from each instrument individually (matching the working test implementation)
         for instrument in instruments:
             exchange = instrument.get("exchange")
             symbol = instrument.get("symbol")
             exchange_token = instrument.get("exchange_token")
-            
+
             # If only exchange_token is provided, we need to map it to a symbol
             if not symbol and exchange_token:
                 symbol = exchange_token
-                
+
             if not exchange or not symbol:
-                print(f"Invalid instrument: {instrument}")
+                self._log(1, "ERROR", f"Invalid instrument: {instrument}")
                 continue
-                
-            # Print information about unsubscription
-            print(f"Unsubscribing from {exchange}:{symbol}")
-            
+
+            self._log(1, "UNSUB", f"Unsubscribing {exchange}:{symbol} LTP")
+
             # Use the exact same message format as the working test
             unsubscribe_msg = {
                 "action": "unsubscribe",
@@ -440,64 +456,64 @@ class FeedAPI(BaseAPI):
                 "exchange": exchange,
                 "mode": 1  # 1 for LTP
             }
-            
+
             try:
                 self.ws.send(json.dumps(unsubscribe_msg))
-                
+
                 # Clean up the data
                 with self.lock:
                     symbol_key = f"{exchange}:{symbol}"
                     if symbol_key in self.ltp_data:
                         del self.ltp_data[symbol_key]
-                
+
                 # Small delay to ensure the message is processed separately
                 time.sleep(0.1)
             except Exception as e:
-                print(f"Error unsubscribing from {exchange}:{symbol}: {e}")
+                self._log(1, "ERROR", f"Error unsubscribing {exchange}:{symbol}: {e}")
                 return False
-        
+
         return True
         
     def subscribe_quote(self, instruments: List[Dict[str, Any]], on_data_received: Optional[Callable] = None) -> bool:
         """
         Subscribe to Quote updates for instruments.
-        
+
         Args:
             instruments: List of instrument dictionaries with keys:
                 - exchange (str): Exchange code (e.g., 'NSE', 'BSE', 'NFO')
                 - symbol (str): Trading symbol
                 - exchange_token (str, optional): Exchange token for the instrument
             on_data_received: Callback function for data updates
-            
+
         Returns:
             bool: True if subscription request sent successfully
         """
         if not self.connected:
-            print("Not connected to WebSocket server. Connect first.")
+            self._log(1, "ERROR", "Not connected to WebSocket server")
             return False
-            
+
         if not self.authenticated:
-            print("Not authenticated with WebSocket server")
+            self._log(1, "ERROR", "Not authenticated with WebSocket server")
             return False
-                
+
         # Set callback if provided
         if on_data_received:
             self.quote_callback = on_data_received
-        
+
         # Subscribe to each instrument individually
         for instrument in instruments:
             exchange = instrument.get("exchange")
             symbol = instrument.get("symbol")
             exchange_token = instrument.get("exchange_token")
-            
+
             # If only exchange_token is provided, we need to map it to a symbol
             if not symbol and exchange_token:
                 symbol = exchange_token
-                
+
             if not exchange or not symbol:
-                print(f"Invalid instrument: {instrument}")
+                self._log(1, "ERROR", f"Invalid instrument: {instrument}")
                 continue
-                
+
             # Use the same message format as for LTP but with mode 2 for Quote
             subscription_msg = {
                 "action": "subscribe",
@@ -506,52 +522,51 @@ class FeedAPI(BaseAPI):
                 "mode": 2,  # 2 for Quote
                 "depth": 5  # Default depth level
             }
-            
-            print(f"Subscribing to {exchange}:{symbol} Quote")
+
+            self._log(1, "SUB", f"Subscribing {exchange}:{symbol} Quote...")
             try:
                 self.ws.send(json.dumps(subscription_msg))
-                
+
                 # Small delay to ensure the message is processed separately
                 time.sleep(0.1)
             except Exception as e:
-                print(f"Error subscribing to {exchange}:{symbol}: {e}")
+                self._log(1, "ERROR", f"Error subscribing to {exchange}:{symbol}: {e}")
                 return False
-        
+
         return True
     
     def unsubscribe_quote(self, instruments: List[Dict[str, Any]]) -> bool:
         """
         Unsubscribe from Quote updates for instruments.
-        
+
         Args:
             instruments: List of instrument dictionaries with keys:
                 - exchange (str): Exchange code (e.g., 'NSE', 'BSE', 'NFO')
                 - symbol (str): Trading symbol
                 - exchange_token (str, optional): Exchange token for the instrument
-                
+
         Returns:
             bool: True if unsubscription successful, False otherwise
         """
         if not self.connected or not self.authenticated:
             return False
-        
+
         # Unsubscribe from each instrument individually
         for instrument in instruments:
             exchange = instrument.get("exchange")
             symbol = instrument.get("symbol")
             exchange_token = instrument.get("exchange_token")
-            
+
             # If only exchange_token is provided, we need to map it to a symbol
             if not symbol and exchange_token:
                 symbol = exchange_token
-                
+
             if not exchange or not symbol:
-                print(f"Invalid instrument: {instrument}")
+                self._log(1, "ERROR", f"Invalid instrument: {instrument}")
                 continue
-                
-            # Print information about unsubscription
-            print(f"Unsubscribing from {exchange}:{symbol}")
-            
+
+            self._log(1, "UNSUB", f"Unsubscribing {exchange}:{symbol} Quote")
+
             # Use the same message format as for LTP but with mode 2 for Quote
             unsubscribe_msg = {
                 "action": "unsubscribe",
@@ -559,64 +574,64 @@ class FeedAPI(BaseAPI):
                 "exchange": exchange,
                 "mode": 2  # 2 for Quote
             }
-            
+
             try:
                 self.ws.send(json.dumps(unsubscribe_msg))
-                
+
                 # Clean up the data
                 with self.lock:
                     symbol_key = f"{exchange}:{symbol}"
                     if symbol_key in self.quotes_data:
                         del self.quotes_data[symbol_key]
-                
+
                 # Small delay to ensure the message is processed separately
                 time.sleep(0.1)
             except Exception as e:
-                print(f"Error unsubscribing from {exchange}:{symbol}: {e}")
+                self._log(1, "ERROR", f"Error unsubscribing {exchange}:{symbol}: {e}")
                 return False
-        
+
         return True
         
     def subscribe_depth(self, instruments: List[Dict[str, Any]], on_data_received: Optional[Callable] = None) -> bool:
         """
         Subscribe to Market Depth updates for instruments.
-        
+
         Args:
             instruments: List of instrument dictionaries with keys:
                 - exchange (str): Exchange code (e.g., 'NSE', 'BSE', 'NFO')
                 - symbol (str): Trading symbol
                 - exchange_token (str, optional): Exchange token for the instrument
             on_data_received: Callback function for data updates
-            
+
         Returns:
             bool: True if subscription request sent successfully
         """
         if not self.connected:
-            print("Not connected to WebSocket server. Connect first.")
+            self._log(1, "ERROR", "Not connected to WebSocket server")
             return False
-            
+
         if not self.authenticated:
-            print("Not authenticated with WebSocket server")
+            self._log(1, "ERROR", "Not authenticated with WebSocket server")
             return False
-                
+
         # Set callback if provided
         if on_data_received:
             self.depth_callback = on_data_received
-        
+
         # Subscribe to each instrument individually
         for instrument in instruments:
             exchange = instrument.get("exchange")
             symbol = instrument.get("symbol")
             exchange_token = instrument.get("exchange_token")
-            
+
             # If only exchange_token is provided, we need to map it to a symbol
             if not symbol and exchange_token:
                 symbol = exchange_token
-                
+
             if not exchange or not symbol:
-                print(f"Invalid instrument: {instrument}")
+                self._log(1, "ERROR", f"Invalid instrument: {instrument}")
                 continue
-                
+
             # Use the same message format as for Quote but with mode 3 for Market Depth
             subscription_msg = {
                 "action": "subscribe",
@@ -625,52 +640,51 @@ class FeedAPI(BaseAPI):
                 "mode": 3,  # 3 for Market Depth
                 "depth": 5  # Default depth level
             }
-            
-            print(f"Subscribing to {exchange}:{symbol} Market Depth")
+
+            self._log(1, "SUB", f"Subscribing {exchange}:{symbol} Depth...")
             try:
                 self.ws.send(json.dumps(subscription_msg))
-                
+
                 # Small delay to ensure the message is processed separately
                 time.sleep(0.1)
             except Exception as e:
-                print(f"Error subscribing to {exchange}:{symbol}: {e}")
+                self._log(1, "ERROR", f"Error subscribing to {exchange}:{symbol}: {e}")
                 return False
-        
+
         return True
     
     def unsubscribe_depth(self, instruments: List[Dict[str, Any]]) -> bool:
         """
         Unsubscribe from Market Depth updates for instruments.
-        
+
         Args:
             instruments: List of instrument dictionaries with keys:
                 - exchange (str): Exchange code (e.g., 'NSE', 'BSE', 'NFO')
                 - symbol (str): Trading symbol
                 - exchange_token (str, optional): Exchange token for the instrument
-                
+
         Returns:
             bool: True if unsubscription successful, False otherwise
         """
         if not self.connected or not self.authenticated:
             return False
-        
+
         # Unsubscribe from each instrument individually
         for instrument in instruments:
             exchange = instrument.get("exchange")
             symbol = instrument.get("symbol")
             exchange_token = instrument.get("exchange_token")
-            
+
             # If only exchange_token is provided, we need to map it to a symbol
             if not symbol and exchange_token:
                 symbol = exchange_token
-                
+
             if not exchange or not symbol:
-                print(f"Invalid instrument: {instrument}")
+                self._log(1, "ERROR", f"Invalid instrument: {instrument}")
                 continue
-                
-            # Print information about unsubscription
-            print(f"Unsubscribing from {exchange}:{symbol}")
-            
+
+            self._log(1, "UNSUB", f"Unsubscribing {exchange}:{symbol} Depth")
+
             # Use the same message format as for Quote but with mode 3 for Market Depth
             unsubscribe_msg = {
                 "action": "unsubscribe",
@@ -678,22 +692,22 @@ class FeedAPI(BaseAPI):
                 "exchange": exchange,
                 "mode": 3  # 3 for Market Depth
             }
-            
+
             try:
                 self.ws.send(json.dumps(unsubscribe_msg))
-                
+
                 # Clean up the data
                 with self.lock:
                     symbol_key = f"{exchange}:{symbol}"
                     if symbol_key in self.depth_data:
                         del self.depth_data[symbol_key]
-                
+
                 # Small delay to ensure the message is processed separately
                 time.sleep(0.1)
             except Exception as e:
-                print(f"Error unsubscribing from {exchange}:{symbol}: {e}")
+                self._log(1, "ERROR", f"Error unsubscribing {exchange}:{symbol}: {e}")
                 return False
-        
+
         return True
 
     def get_ltp(self, exchange: str = None, symbol: str = None) -> Dict[str, Any]:

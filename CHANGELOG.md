@@ -5,6 +5,41 @@ All notable changes to the OpenAlgo Python Library will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.40] - 2025-11-25
+
+### New Features
+
+#### WebSocket Feed API - Verbose Control
+- **`verbose` parameter**: Added verbosity control for WebSocket feed operations (LTP, Quote, Depth)
+  - `verbose=False` (default): Silent mode - no SDK output, only errors
+  - `verbose=True` or `1`: Basic info - connection, auth, subscription status
+  - `verbose=2`: Full debug - all market data updates from SDK
+- **Cleaner output format**: Aligned log categories `[WS]`, `[AUTH]`, `[SUB]`, `[LTP]`, `[QUOTE]`, `[DEPTH]`, `[ERROR]`
+- **Trader-friendly logging**: Concise, aligned output for easy troubleshooting
+
+### Usage Example
+```python
+from openalgo import api
+
+# Silent mode (default) - no SDK output
+client = api(api_key="...", host="...", ws_url="...", verbose=False)
+
+# Basic logging - connection/subscription info
+client = api(api_key="...", host="...", ws_url="...", verbose=True)
+
+# Full debug - all data updates
+client = api(api_key="...", host="...", ws_url="...", verbose=2)
+```
+
+### Output Format (verbose=True)
+```
+[WS]    Connected to ws://127.0.0.1:8765
+[AUTH]  Success | Broker: upstox | User: rajandran
+[SUB]   NSE_INDEX:NIFTY | Mode: Quote | Status: success
+```
+
+---
+
 ## [1.0.36] - 2025-01-20
 
 ### ✨ New Features
