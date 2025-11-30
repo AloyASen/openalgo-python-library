@@ -82,13 +82,14 @@ class DataAPI(BaseAPI):
                 'error_type': 'unknown_error'
             }
 
-    def quotes(self, *, symbol, exchange):
+    def quotes(self, *, symbol, exchange, **kwargs):
         """
         Get real-time quotes for a symbol.
 
         Parameters:
         - symbol (str): Trading symbol. Required.
         - exchange (str): Exchange code. Required.
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing quote data including bid, ask, ltp, volume etc.
@@ -98,9 +99,13 @@ class DataAPI(BaseAPI):
             "symbol": symbol,
             "exchange": exchange
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("quotes", payload)
 
-    def multiquotes(self, *, symbols):
+    def multiquotes(self, *, symbols, **kwargs):
         """
         Get real-time quotes for multiple symbols in a single request.
 
@@ -108,6 +113,7 @@ class DataAPI(BaseAPI):
         - symbols (list): List of symbol-exchange pairs. Required.
             Each item should be a dict with 'symbol' and 'exchange' keys.
             Example: [{"symbol": "RELIANCE", "exchange": "NSE"}, {"symbol": "TCS", "exchange": "NSE"}]
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing quote data for all requested symbols.
@@ -137,15 +143,20 @@ class DataAPI(BaseAPI):
             "apikey": self.api_key,
             "symbols": symbols
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("multiquotes", payload)
 
-    def depth(self, *, symbol, exchange):
+    def depth(self, *, symbol, exchange, **kwargs):
         """
         Get market depth (order book) for a symbol.
 
         Parameters:
         - symbol (str): Trading symbol. Required.
         - exchange (str): Exchange code. Required.
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing market depth data including top 5 bids/asks.
@@ -155,15 +166,20 @@ class DataAPI(BaseAPI):
             "symbol": symbol,
             "exchange": exchange
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("depth", payload)
 
-    def symbol(self, *, symbol, exchange):
+    def symbol(self, *, symbol, exchange, **kwargs):
         """
         Get symbol details from the API.
 
         Parameters:
         - symbol (str): Trading symbol. Required.
         - exchange (str): Exchange code. Required.
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing symbol details like token, lot size, tick size, etc.
@@ -173,21 +189,26 @@ class DataAPI(BaseAPI):
             "symbol": symbol,
             "exchange": exchange
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("symbol", payload)
         
-    def search(self, *, query, exchange=None):
+    def search(self, *, query, exchange=None, **kwargs):
         """
         Search for symbols across exchanges.
-        
+
         Parameters:
         - query (str): Search query for symbol. Required.
         - exchange (str): Exchange filter. Optional.
             Supported exchanges: NSE, NFO, BSE, BFO, MCX, CDS, BCD, NCDEX, NSE_INDEX, BSE_INDEX, MCX_INDEX
-        
+        - **kwargs: Optional additional parameters for future API extensions.
+
         Returns:
         dict: JSON response containing matching symbols with details like:
             - symbol: Trading symbol
-            - name: Company/instrument name  
+            - name: Company/instrument name
             - exchange: Exchange code
             - token: Unique instrument token
             - instrumenttype: Type of instrument
@@ -201,10 +222,14 @@ class DataAPI(BaseAPI):
         }
         if exchange:
             payload["exchange"] = exchange
-            
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
+
         return self._make_request("search", payload)
         
-    def history(self, *, symbol, exchange, interval, start_date, end_date):
+    def history(self, *, symbol, exchange, interval, start_date, end_date, **kwargs):
         """
         Get historical data for a symbol in pandas DataFrame format.
 
@@ -215,6 +240,7 @@ class DataAPI(BaseAPI):
                        Use interval() method to get supported intervals.
         - start_date (str): Start date in format 'YYYY-MM-DD'. Required.
         - end_date (str): End date in format 'YYYY-MM-DD'. Required.
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         pandas.DataFrame or dict: DataFrame with historical data if successful,
@@ -230,6 +256,10 @@ class DataAPI(BaseAPI):
             "start_date": start_date,
             "end_date": end_date
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
 
         result = self._make_request("history", payload)
         
@@ -267,9 +297,12 @@ class DataAPI(BaseAPI):
                 }
         return result
 
-    def intervals(self):
+    def intervals(self, **kwargs):
         """
         Get supported time intervals for historical data from the API.
+
+        Parameters:
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing supported intervals categorized by type
@@ -278,6 +311,10 @@ class DataAPI(BaseAPI):
         payload = {
             "apikey": self.api_key
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("intervals", payload)
         
     def interval(self):
@@ -290,7 +327,7 @@ class DataAPI(BaseAPI):
         """
         return self.intervals()
 
-    def expiry(self, *, symbol, exchange, instrumenttype):
+    def expiry(self, *, symbol, exchange, instrumenttype, **kwargs):
         """
         Get expiry dates for a symbol.
 
@@ -298,6 +335,7 @@ class DataAPI(BaseAPI):
         - symbol (str): Trading symbol. Required.
         - exchange (str): Exchange code. Required.
         - instrumenttype (str): Instrument type (futures/options). Required.
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing expiry dates for the symbol
@@ -308,6 +346,10 @@ class DataAPI(BaseAPI):
             "exchange": exchange,
             "instrumenttype": instrumenttype
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("expiry", payload)
 
     def instruments(self, *, exchange=None):
@@ -475,7 +517,7 @@ class DataAPI(BaseAPI):
                 'error_type': 'unknown_error'
             }
 
-    def syntheticfuture(self, *, underlying, exchange, expiry_date):
+    def syntheticfuture(self, *, underlying, exchange, expiry_date, **kwargs):
         """
         Calculate synthetic futures price using ATM Call and Put options.
 
@@ -555,4 +597,8 @@ class DataAPI(BaseAPI):
             "exchange": exchange,
             "expiry_date": expiry_date
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("syntheticfuture", payload)

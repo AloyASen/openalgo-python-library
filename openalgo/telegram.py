@@ -79,7 +79,7 @@ class TelegramAPI(BaseAPI):
                 'error_type': 'unknown_error'
             }
 
-    def telegram(self, *, username, message, priority=5):
+    def telegram(self, *, username, message, priority=5, **kwargs):
         """
         Send Custom Alert Messages to Telegram Users.
 
@@ -218,5 +218,9 @@ class TelegramAPI(BaseAPI):
             "message": message,
             "priority": priority
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
 
         return self._make_request("telegram/notify", payload)

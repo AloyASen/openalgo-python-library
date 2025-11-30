@@ -80,9 +80,12 @@ class AccountAPI(BaseAPI):
                 'error_type': 'unknown_error'
             }
 
-    def funds(self):
+    def funds(self, **kwargs):
         """
         Get funds and margin details of the connected trading account.
+
+        Parameters:
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing funds data with format:
@@ -100,11 +103,18 @@ class AccountAPI(BaseAPI):
         payload = {
             "apikey": self.api_key
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("funds", payload)
 
-    def orderbook(self):
+    def orderbook(self, **kwargs):
         """
         Get orderbook details from the broker with basic orderbook statistics.
+
+        Parameters:
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing orders data with format:
@@ -140,11 +150,18 @@ class AccountAPI(BaseAPI):
         payload = {
             "apikey": self.api_key
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("orderbook", payload)
 
-    def tradebook(self):
+    def tradebook(self, **kwargs):
         """
         Get tradebook details from the broker.
+
+        Parameters:
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing trades data with format:
@@ -169,11 +186,18 @@ class AccountAPI(BaseAPI):
         payload = {
             "apikey": self.api_key
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("tradebook", payload)
 
-    def positionbook(self):
+    def positionbook(self, **kwargs):
         """
         Get positionbook details from the broker.
+
+        Parameters:
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing positions data with format:
@@ -194,11 +218,18 @@ class AccountAPI(BaseAPI):
         payload = {
             "apikey": self.api_key
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("positionbook", payload)
 
-    def holdings(self):
+    def holdings(self, **kwargs):
         """
         Get stock holdings details from the broker.
+
+        Parameters:
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing holdings data with format:
@@ -228,11 +259,18 @@ class AccountAPI(BaseAPI):
         payload = {
             "apikey": self.api_key
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("holdings", payload)
 
-    def analyzerstatus(self):
+    def analyzerstatus(self, **kwargs):
         """
         Get analyzer status information.
+
+        Parameters:
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing analyzer status with format:
@@ -248,14 +286,19 @@ class AccountAPI(BaseAPI):
         payload = {
             "apikey": self.api_key
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("analyzer", payload)
 
-    def analyzertoggle(self, mode):
+    def analyzertoggle(self, mode, **kwargs):
         """
         Toggle analyzer mode between analyze and live modes.
 
         Args:
             mode (bool): True for analyze mode (simulated), False for live mode
+            **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing analyzer toggle result with format:
@@ -273,9 +316,13 @@ class AccountAPI(BaseAPI):
             "apikey": self.api_key,
             "mode": mode
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
         return self._make_request("analyzer/toggle", payload)
 
-    def margin(self, *, positions: List[Dict[str, Union[str, int, float]]]) -> Dict[str, Any]:
+    def margin(self, *, positions: List[Dict[str, Union[str, int, float]]], **kwargs) -> Dict[str, Any]:
         """
         Calculate margin requirements for a basket of positions.
 
@@ -404,5 +451,9 @@ class AccountAPI(BaseAPI):
             "apikey": self.api_key,
             "positions": processed_positions
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
 
         return self._make_request("margin", payload)

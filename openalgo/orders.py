@@ -161,7 +161,7 @@ class OrderAPI(BaseAPI):
         
         return self._make_request("placesmartorder", payload)
 
-    def basketorder(self, *, strategy="Python", orders):
+    def basketorder(self, *, strategy="Python", orders, **kwargs):
         """
         Place multiple orders simultaneously.
 
@@ -178,6 +178,7 @@ class OrderAPI(BaseAPI):
             - price (str): Required for LIMIT orders
             - trigger_price (str): Required for SL and SL-M orders
             - disclosed_quantity (str): Disclosed quantity
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing results for each order with format:
@@ -200,13 +201,17 @@ class OrderAPI(BaseAPI):
             for key, value in order.items():
                 processed_order[key] = str(value) if isinstance(value, (int, float)) else value
             processed_orders.append(processed_order)
-            
+
         payload = {
             "apikey": self.api_key,
             "strategy": strategy,
             "orders": processed_orders
         }
-        
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = str(value)
+
         return self._make_request("basketorder", payload)
 
     def splitorder(self, *, strategy="Python", symbol, action, exchange, quantity, splitsize, price_type="MARKET", product="MIS", **kwargs):
@@ -263,13 +268,14 @@ class OrderAPI(BaseAPI):
         
         return self._make_request("splitorder", payload)
 
-    def orderstatus(self, *, order_id, strategy="Python"):
+    def orderstatus(self, *, order_id, strategy="Python", **kwargs):
         """
         Get the current status of an order.
 
         Parameters:
         - order_id (str): The ID of the order to check. Required.
         - strategy (str, optional): The trading strategy name. Defaults to "Python".
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing order details with format:
@@ -295,9 +301,13 @@ class OrderAPI(BaseAPI):
             "strategy": strategy,
             "orderid": order_id
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = str(value)
         return self._make_request("orderstatus", payload)
 
-    def openposition(self, *, strategy="Python", symbol, exchange, product):
+    def openposition(self, *, strategy="Python", symbol, exchange, product, **kwargs):
         """
         Get the current open position for a specific symbol.
 
@@ -306,6 +316,7 @@ class OrderAPI(BaseAPI):
         - symbol (str): Trading symbol. Required.
         - exchange (str): Exchange code. Required.
         - product (str): Product type. Required.
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing position details with format:
@@ -321,6 +332,10 @@ class OrderAPI(BaseAPI):
             "exchange": exchange,
             "product": product
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = str(value)
         return self._make_request("openposition", payload)
     
     def modifyorder(self, *, order_id, strategy="Python", symbol, action, exchange, price_type="LIMIT", product, quantity, price, disclosed_quantity="0", trigger_price="0", **kwargs):
@@ -365,13 +380,14 @@ class OrderAPI(BaseAPI):
         
         return self._make_request("modifyorder", payload)
     
-    def cancelorder(self, *, order_id, strategy="Python"):
+    def cancelorder(self, *, order_id, strategy="Python", **kwargs):
         """
         Cancel an existing order.
 
         Parameters:
         - order_id (str): The ID of the order to cancel. Required.
         - strategy (str, optional): The trading strategy name. Defaults to "Python".
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response from the API.
@@ -381,14 +397,19 @@ class OrderAPI(BaseAPI):
             "orderid": order_id,
             "strategy": strategy
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = str(value)
         return self._make_request("cancelorder", payload)
     
-    def closeposition(self, *, strategy="Python"):
+    def closeposition(self, *, strategy="Python", **kwargs):
         """
         Close all open positions for a given strategy.
 
         Parameters:
         - strategy (str, optional): The trading strategy name. Defaults to "Python".
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response from the API indicating the result of the close position action.
@@ -397,14 +418,19 @@ class OrderAPI(BaseAPI):
             "apikey": self.api_key,
             "strategy": strategy
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = str(value)
         return self._make_request("closeposition", payload)
     
-    def cancelallorder(self, *, strategy="Python"):
+    def cancelallorder(self, *, strategy="Python", **kwargs):
         """
         Cancel all orders for a given strategy.
 
         Parameters:
         - strategy (str, optional): The trading strategy name. Defaults to "Python".
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response from the API indicating the result of the cancel all orders action.
@@ -413,4 +439,8 @@ class OrderAPI(BaseAPI):
             "apikey": self.api_key,
             "strategy": strategy
         }
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = str(value)
         return self._make_request("cancelallorder", payload)

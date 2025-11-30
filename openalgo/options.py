@@ -80,27 +80,33 @@ class OptionsAPI(BaseAPI):
                 'error_type': 'unknown_error'
             }
 
-    def optiongreeks(self, *, symbol, exchange, interest_rate=None, underlying_symbol=None, underlying_exchange=None, expiry_time=None):
+    def optiongreeks(self, *, symbol, exchange, interest_rate=None, forward_price=None, underlying_symbol=None, underlying_exchange=None, expiry_time=None, **kwargs):
         """
-        Calculate Option Greeks (Delta, Gamma, Theta, Vega, Rho) and Implied Volatility using Black-Scholes Model.
+        Calculate Option Greeks (Delta, Gamma, Theta, Vega, Rho) and Implied Volatility using Black-76 Model.
 
         Prerequisites:
-        - mibian library required: pip install mibian
-        - Requires real-time LTP for underlying and option
+        - py_vollib library required: pip install py_vollib
+        - Requires real-time LTP for underlying and option (unless forward_price is provided)
 
         Parameters:
-        - symbol (str): Option symbol (e.g., NIFTY28NOV2526000CE). Required.
+        - symbol (str): Option symbol (e.g., NIFTY02DEC2526000CE). Required.
         - exchange (str): Exchange code (NFO, BFO, CDS, MCX). Required.
         - interest_rate (float, optional): Risk-free interest rate (annualized %).
                                           Default is 0. Specify current RBI repo rate (e.g., 6.5)
                                           for accurate Rho calculations.
-        - underlying_symbol (str, optional): Custom underlying symbol (e.g., NIFTY or NIFTY28NOV25FUT).
+        - forward_price (float, optional): Custom forward/synthetic futures price. If provided,
+                                          skips underlying price fetch. Useful for:
+                                          - Synthetic futures pricing (Spot x e^rT)
+                                          - Illiquid underlyings like FINNIFTY, MIDCPNIFTY
+                                          - Custom scenario analysis
+        - underlying_symbol (str, optional): Custom underlying symbol (e.g., NIFTY or NIFTY30DEC25FUT).
                                             Auto-detected if not specified.
         - underlying_exchange (str, optional): Custom underlying exchange (e.g., NSE_INDEX or NFO).
                                               Auto-detected if not specified.
         - expiry_time (str, optional): Custom expiry time in HH:MM format (e.g., "17:00", "19:00").
                                       Required for MCX contracts with non-standard expiry times.
                                       Exchange defaults: NFO/BFO=15:30, CDS=12:30, MCX=23:30
+        - **kwargs: Optional additional parameters for future API extensions.
 
         Returns:
         dict: JSON response containing:
@@ -112,7 +118,7 @@ class OptionsAPI(BaseAPI):
             - option_type: CE/PE
             - expiry_date: Expiry date
             - days_to_expiry: Days remaining to expiry
-            - spot_price: Underlying price
+            - spot_price: Underlying/forward price used
             - option_price: Current option premium
             - interest_rate: Interest rate used
             - implied_volatility: Implied Volatility (%)
@@ -121,28 +127,36 @@ class OptionsAPI(BaseAPI):
         Example:
             # Basic usage with auto-detected spot
             greeks = api.optiongreeks(
-                symbol="NIFTY28NOV2526000CE",
+                symbol="NIFTY02DEC2526000CE",
                 exchange="NFO"
             )
 
             # With custom interest rate
             greeks = api.optiongreeks(
-                symbol="BANKNIFTY28NOV2550000CE",
+                symbol="BANKNIFTY30DEC2550000CE",
                 exchange="NFO",
                 interest_rate=6.5
             )
 
             # Using futures as underlying
             greeks = api.optiongreeks(
-                symbol="NIFTY28NOV2526000CE",
+                symbol="NIFTY30DEC2526000CE",
                 exchange="NFO",
-                underlying_symbol="NIFTY28NOV25FUT",
+                underlying_symbol="NIFTY30DEC25FUT",
                 underlying_exchange="NFO"
+            )
+
+            # With custom forward price (synthetic futures)
+            greeks = api.optiongreeks(
+                symbol="NIFTY02DEC2526000CE",
+                exchange="NFO",
+                forward_price=26350,
+                interest_rate=6.5
             )
 
             # MCX with custom expiry time
             greeks = api.optiongreeks(
-                symbol="CRUDEOIL17NOV255400CE",
+                symbol="CRUDEOIL17DEC255400CE",
                 exchange="MCX",
                 expiry_time="19:00"
             )
@@ -156,12 +170,19 @@ class OptionsAPI(BaseAPI):
         # Add optional parameters if provided
         if interest_rate is not None:
             payload["interest_rate"] = interest_rate
+        if forward_price is not None:
+            payload["forward_price"] = forward_price
         if underlying_symbol is not None:
             payload["underlying_symbol"] = underlying_symbol
         if underlying_exchange is not None:
             payload["underlying_exchange"] = underlying_exchange
         if expiry_time is not None:
             payload["expiry_time"] = expiry_time
+
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
 
         return self._make_request("optiongreeks", payload)
 
@@ -278,7 +299,7 @@ class OptionsAPI(BaseAPI):
 
         return self._make_request("optionsorder", payload)
 
-    def optionsymbol(self, *, strategy=None, underlying, exchange, strike_int=None, offset, option_type, expiry_date=None):
+    def optionsymbol(self, *, strategy=None, underlying, exchange, strike_int=None, offset, option_type, expiry_date=None, **kwargs):
         """
         Returns Option Symbol Details based on Underlying and Offset.
 
@@ -378,9 +399,14 @@ class OptionsAPI(BaseAPI):
         if expiry_date is not None:
             payload["expiry_date"] = expiry_date
 
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = str(value)
+
         return self._make_request("optionsymbol", payload)
 
-    def optionsmultiorder(self, *, strategy, underlying, exchange, legs, expiry_date=None, strike_int=None):
+    def optionsmultiorder(self, *, strategy, underlying, exchange, legs, expiry_date=None, strike_int=None, **kwargs):
         """
         Place Multiple Option Legs with Common Underlying by Auto-Resolving Symbols based on Offset.
         BUY legs are executed first for margin efficiency, then SELL legs.
@@ -528,9 +554,14 @@ class OptionsAPI(BaseAPI):
         if expiry_date is not None:
             payload["expiry_date"] = expiry_date
 
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
+
         return self._make_request("optionsmultiorder", payload)
 
-    def optionchain(self, *, underlying, exchange, expiry_date=None, strike_count=None):
+    def optionchain(self, *, underlying, exchange, expiry_date=None, strike_count=None, **kwargs):
         """
         Fetch Option Chain Data with Real-time Quotes for All Strikes.
 
@@ -629,5 +660,10 @@ class OptionsAPI(BaseAPI):
             payload["expiry_date"] = expiry_date
         if strike_count is not None:
             payload["strike_count"] = int(strike_count)
+
+        # Add any additional kwargs
+        for key, value in kwargs.items():
+            if value is not None:
+                payload[key] = value
 
         return self._make_request("optionchain", payload)
