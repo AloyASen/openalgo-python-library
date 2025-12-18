@@ -871,9 +871,9 @@ class FeedAPI(BaseAPI):
                     for i, level in enumerate(buy_depth):
                         level_num = str(i + 1)
                         result["depth"][ex][sym]["buyBook"][level_num] = {
-                            "price": float(level.get('price', 0)),
-                            "qty": int(level.get('quantity', 0)),
-                            "orders": int(level.get('orders', 0))
+                            "price": float(level.get('price') or 0),
+                            "qty": int(level.get('quantity') or 0),
+                            "orders": int(level.get('orders') or 0)
                         }
 
                     # If there are fewer than 5 levels, add empty levels to complete the structure
@@ -890,9 +890,9 @@ class FeedAPI(BaseAPI):
                     for i, level in enumerate(sell_depth):
                         level_num = str(i + 1)
                         result["depth"][ex][sym]["sellBook"][level_num] = {
-                            "price": float(level.get('price', 0)),
-                            "qty": int(level.get('quantity', 0)),
-                            "orders": int(level.get('orders', 0))
+                            "price": float(level.get('price') or 0),
+                            "qty": int(level.get('quantity') or 0),
+                            "orders": int(level.get('orders') or 0)
                         }
 
                     # If there are fewer than 5 levels, add empty levels to complete the structure
