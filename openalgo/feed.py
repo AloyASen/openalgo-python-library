@@ -871,37 +871,37 @@ class FeedAPI(BaseAPI):
                     for i, level in enumerate(buy_depth):
                         level_num = str(i + 1)
                         result["depth"][ex][sym]["buyBook"][level_num] = {
-                            "price": str(level.get('price', 0)),
-                            "qty": str(level.get('quantity', 0)),
-                            "orders": str(level.get('orders', 0))
+                            "price": float(level.get('price', 0)),
+                            "qty": int(level.get('quantity', 0)),
+                            "orders": int(level.get('orders', 0))
                         }
-                    
+
                     # If there are fewer than 5 levels, add empty levels to complete the structure
                     for i in range(len(buy_depth), 5):
                         level_num = str(i + 1)
                         result["depth"][ex][sym]["buyBook"][level_num] = {
-                            "price": "0",
-                            "qty": "0",
-                            "orders": "0"
+                            "price": 0.0,
+                            "qty": 0,
+                            "orders": 0
                         }
-                    
+
                     # Process sell depth book
                     sell_depth = data.get('depth', {}).get('sell', [])
                     for i, level in enumerate(sell_depth):
                         level_num = str(i + 1)
                         result["depth"][ex][sym]["sellBook"][level_num] = {
-                            "price": str(level.get('price', 0)),
-                            "qty": str(level.get('quantity', 0)),
-                            "orders": str(level.get('orders', 0))
+                            "price": float(level.get('price', 0)),
+                            "qty": int(level.get('quantity', 0)),
+                            "orders": int(level.get('orders', 0))
                         }
-                    
+
                     # If there are fewer than 5 levels, add empty levels to complete the structure
                     for i in range(len(sell_depth), 5):
                         level_num = str(i + 1)
                         result["depth"][ex][sym]["sellBook"][level_num] = {
-                            "price": "0",
-                            "qty": "0",
-                            "orders": "0"
+                            "price": 0.0,
+                            "qty": 0,
+                            "orders": 0
                         }
             
             return result
