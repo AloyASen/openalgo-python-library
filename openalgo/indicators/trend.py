@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Technical Indicators - Trend Indicators
+layr0-IMC Technical Indicators - Trend Indicators
 """
 
 import numpy as np
 import pandas as pd
-from openalgo.numba_shim import jit
+from layr0-IMC.numba_shim import jit
 from typing import Union, Tuple, Optional
 from .base import BaseIndicator
 from .utils import sma, ema, highest, lowest, vwma_optimized, kama_optimized, atr_wilder

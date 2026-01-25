@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Test ADX with real data from OpenAlgo API
+Test ADX with real data from layr0-IMC API
 """
 
 import sys
@@ -9,8 +9,8 @@ import os
 # Add the parent directory to path to use our current testing version
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from openalgo import api
-from openalgo import ta
+from layr0-IMC import api
+from layr0-IMC import ta
 import pandas as pd
 
 def test_adx_with_real_data():
@@ -98,7 +98,7 @@ def test_adx_with_real_data():
             
     except Exception as e:
         print(f"Error: {e}")
-        print("Make sure your API key and host are correct, and the OpenAlgo server is running.")
+        print("Make sure your API key and host are correct, and the layr0-IMC server is running.")
         
         # Fallback: Test with sample data
         print(f"\nFalling back to sample data test...")

@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="openalgo",
+    name="layr0-IMC",
     version="1.0.45",
     author="Rajandran R",
-    author_email="rajandran@openalgo.in",
-    description="A Python library for interacting with OpenAlgo's trading APIs with high-performance technical indicators",
+    author_email="rajandran@layr0-IMC.in",
+    description="A Python library for interacting with layr0-IMC's trading APIs with high-performance technical indicators",
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type="text/markdown",
-    url="https://openalgo.in",
+    url="https://layr0-IMC.in",
     packages=find_packages(),
     install_requires=[
         "httpx>=0.23.0",
@@ -45,7 +45,7 @@ setup(
         "real-time", 
         "stock-market",
         "api-wrapper",
-        "openalgo",
+        "layr0-IMC",
         "market-data",
         "trading-api",
         "stock-trading",
@@ -61,8 +61,8 @@ setup(
         "volume-analysis"
     ],
     project_urls={
-        "Documentation": "https://docs.openalgo.in",
-        "Source": "https://github.com/openalgo/openalgo-python",
-        "Tracker": "https://github.com/openalgo/openalgo-python/issues",
+        "Documentation": "https://docs.layr0-IMC.in",
+        "Source": "https://github.com/layr0-IMC/layr0-IMC-python",
+        "Tracker": "https://github.com/layr0-IMC/layr0-IMC-python/issues",
     },
 )

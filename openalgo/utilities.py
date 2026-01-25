@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo REST API Documentation - Utilities Methods
-    https://docs.openalgo.in
+layr0-IMC REST API Documentation - Utilities Methods
+    https://docs.layr0-IMC.in
 """
 
 import httpx
@@ -11,7 +11,7 @@ from .base import BaseAPI
 
 class UtilitiesAPI(BaseAPI):
     """
-    Utilities API methods for OpenAlgo.
+    Utilities API methods for layr0-IMC.
     Inherits from the BaseAPI class.
     """
 

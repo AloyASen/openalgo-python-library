@@ -1,8 +1,8 @@
-# OpenAlgo Technical Indicators Library - PERFECT VALIDATION COMPLETE
+# layr0-IMC Technical Indicators Library - PERFECT VALIDATION COMPLETE
 
 ## 🎉 WORLD-CLASS ACHIEVEMENT
 
-Successfully implemented a comprehensive technical analysis library for OpenAlgo with **104 technical indicators** achieving **UNPRECEDENTED 100% SUCCESS RATE**. The library provides intuitive, professional syntax with high-performance NumPy & Numba optimizations.
+Successfully implemented a comprehensive technical analysis library for layr0-IMC with **104 technical indicators** achieving **UNPRECEDENTED 100% SUCCESS RATE**. The library provides intuitive, professional syntax with high-performance NumPy & Numba optimizations.
 
 **🏆 PERFECT VALIDATION ACHIEVEMENT**: All 104 indicators working flawlessly with 100% success rate across all dataset sizes and comprehensive real market data testing.
 
@@ -120,7 +120,7 @@ Successfully implemented a comprehensive technical analysis library for OpenAlgo
 ## Professional Syntax
 
 ```python
-from openalgo import ta
+from layr0-IMC import ta
 
 # Trend indicators
 sma_20 = ta.sma(close, 20)
@@ -228,7 +228,7 @@ Tested with different dataset sizes - all indicators now working:
 
 ### Multi-Indicator Trading Strategy
 ```python
-from openalgo import ta
+from layr0-IMC import ta
 import numpy as np
 
 # Generate sample data
@@ -286,10 +286,10 @@ resistance_levels = [r1[-1], r2[-1], r3[-1]]
 
 ## 🔧 Installation & Setup
 
-The library is already integrated into OpenAlgo. Simply install OpenAlgo:
+The library is already integrated into layr0-IMC. Simply install layr0-IMC:
 
 ```bash
-pip install openalgo
+pip install layr0-IMC
 ```
 
 Dependencies automatically installed:
@@ -299,14 +299,14 @@ Dependencies automatically installed:
 - `httpx>=0.23.0`
 - `websocket-client>=1.8.0`
 
-## 📈 Integration with OpenAlgo
+## 📈 Integration with layr0-IMC
 
-The technical indicators library is seamlessly integrated with OpenAlgo's existing API:
+The technical indicators library is seamlessly integrated with layr0-IMC's existing API:
 
 ```python
-from openalgo import api, ta
+from layr0-IMC import api, ta
 
-# Get market data using OpenAlgo API
+# Get market data using layr0-IMC API
 data = api.get_historical_data("AAPL", "1d", 100)
 
 # Apply technical analysis
@@ -334,7 +334,7 @@ if rsi[-1] < 30 and close[-1] < lower[-1]:
 **⚡ EXCEPTIONAL Performance**: Numba JIT optimizations achieving near-C speeds ✅  
 **🌟 WORLD-CLASS Ready**: Comprehensive validation - ZERO failing indicators ✅  
 **📚 Complete Documentation**: Full API documentation with 100% coverage ✅  
-**🔗 Seamless Integration**: Perfect integration into OpenAlgo ecosystem ✅
+**🔗 Seamless Integration**: Perfect integration into layr0-IMC ecosystem ✅
 
 ### 🌟 COMPETITIVE ADVANTAGES ACHIEVED:
 - **Better than TA-Lib** (100% vs ~85% success rate)
@@ -357,7 +357,7 @@ While the core implementation is complete, potential future enhancements include
 
 ## 🎉 **MISSION ACCOMPLISHED - WORLD-CLASS STATUS ACHIEVED**
 
-**🌍 UNPRECEDENTED ACHIEVEMENT**: OpenAlgo now has the **WORLD'S MOST RELIABLE** technical analysis library, exceeding the capabilities of professional trading platforms with:
+**🌍 UNPRECEDENTED ACHIEVEMENT**: layr0-IMC now has the **WORLD'S MOST RELIABLE** technical analysis library, exceeding the capabilities of professional trading platforms with:
 
 ### 🏆 **PERFECT METRICS**:
 - ✅ **104/104 indicators working** (100%)

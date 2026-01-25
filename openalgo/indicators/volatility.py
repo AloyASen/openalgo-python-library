@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Technical Indicators - Volatility Indicators
+layr0-IMC Technical Indicators - Volatility Indicators
 """
 
 import numpy as np
 import pandas as pd
-from openalgo.numba_shim import jit
+from layr0-IMC.numba_shim import jit
 from typing import Union, Tuple, Optional
 from .base import BaseIndicator
 from .utils import (ema, atr_wilder, true_range, sma, stdev, highest, lowest, 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Technical Indicators Library
+layr0-IMC Technical Indicators Library
 
 A high-performance technical analysis library with NumPy and Numba optimizations.
 Provides TradingView-like syntax for easy use.
@@ -39,7 +39,7 @@ class TechnicalAnalysis:
     
     Usage:
     ------
-    from openalgo import ta
+    from layr0-IMC import ta
     
     # Trend indicators
     sma_20 = ta.sma(close, 20)

@@ -1,6 +1,6 @@
-# OpenAlgo Technical Indicators - Complete Documentation Index
+# layr0-IMC Technical Indicators - Complete Documentation Index
 
-This is a comprehensive index of all documentation files for the OpenAlgo Technical Indicators library.
+This is a comprehensive index of all documentation files for the layr0-IMC Technical Indicators library.
 
 ## Main Documentation Files
 
@@ -188,7 +188,7 @@ This is a comprehensive index of all documentation files for the OpenAlgo Techni
 3. [TECHNICAL_INDICATORS_GUIDE.md](TECHNICAL_INDICATORS_GUIDE.md) - Learn the concepts
 4. [TRADING_STRATEGIES_EXAMPLES.md](TRADING_STRATEGIES_EXAMPLES.md) - Apply the knowledge
 
-### **Experienced with TA, New to OpenAlgo**
+### **Experienced with TA, New to layr0-IMC**
 1. [README.md](README.md) - Quick overview
 2. [INDICATORS_QUICK_REFERENCE.md](INDICATORS_QUICK_REFERENCE.md) - Learn the syntax
 3. [PARAMETERS_REFERENCE.md](PARAMETERS_REFERENCE.md) - Understand the parameters

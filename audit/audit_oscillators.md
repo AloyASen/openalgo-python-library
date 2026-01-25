@@ -1,4 +1,4 @@
-# Oscillators Indicators Audit (openalgo.indicators.oscillators)
+# Oscillators Indicators Audit (layr0-IMC.indicators.oscillators)
 
 _Date_: 2025-06-11 19:25 IST
 

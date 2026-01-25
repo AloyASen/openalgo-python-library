@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo REST API Documentation - Options Methods
-    https://docs.openalgo.in
+layr0-IMC REST API Documentation - Options Methods
+    https://docs.layr0-IMC.in
 """
 
 import httpx
@@ -10,7 +10,7 @@ from .base import BaseAPI
 
 class OptionsAPI(BaseAPI):
     """
-    Options API methods for OpenAlgo.
+    Options API methods for layr0-IMC.
     Inherits from the BaseAPI class.
     """
 

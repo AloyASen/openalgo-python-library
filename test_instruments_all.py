@@ -4,7 +4,7 @@
 Test script for instruments() function - Test ALL exchanges download
 """
 
-from openalgo import api
+from layr0-IMC import api
 import pandas as pd
 
 # API credentials

@@ -1,30 +1,30 @@
 """
-OpenAlgo Telegram Notification API Examples
+layr0-IMC Telegram Notification API Examples
 
 This file demonstrates how to use the Telegram notification API to send
 custom alerts to Telegram users.
 
 Prerequisites:
-1. Telegram Bot must be running in OpenAlgo settings
+1. Telegram Bot must be running in layr0-IMC settings
 2. User must be linked using /link command in Telegram
-3. Username must be your OpenAlgo login username (NOT Telegram username)
+3. Username must be your layr0-IMC login username (NOT Telegram username)
 """
 
-import openalgo
+import layr0-IMC
 
 # Initialize the API client
 # Replace with your actual API key and host
-api = openalgo.api(
+api = layr0-IMC.api(
     api_key="your_api_key_here",
     host="http://127.0.0.1:5000"
 )
 
-# Replace with your OpenAlgo login username
-# NOTE: This is NOT your @telegram_username, it's the username you use to login to OpenAlgo
-USERNAME = "your_openalgo_username"
+# Replace with your layr0-IMC login username
+# NOTE: This is NOT your @telegram_username, it's the username you use to login to layr0-IMC
+USERNAME = "your_layr0-IMC_username"
 
 print("=" * 80)
-print("OpenAlgo Telegram Notification API Examples")
+print("layr0-IMC Telegram Notification API Examples")
 print("=" * 80)
 
 # ============================================================================
@@ -305,8 +305,8 @@ print("\n" + "=" * 80)
 print("Examples completed!")
 print("=" * 80)
 print("\nNote: Make sure to:")
-print("1. Replace USERNAME with your OpenAlgo login username")
+print("1. Replace USERNAME with your layr0-IMC login username")
 print("2. Replace api_key with your actual API key")
-print("3. Ensure Telegram bot is running in OpenAlgo settings")
+print("3. Ensure Telegram bot is running in layr0-IMC settings")
 print("4. Ensure you've linked your account using /link command in Telegram")
 print("=" * 80)

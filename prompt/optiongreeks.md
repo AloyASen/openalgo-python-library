@@ -18,10 +18,10 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/optiongreeks
    * Required for Black-Scholes calculations
 2. **Market Data Access**
    * Requires real-time LTP for underlying and option
-   * Uses OpenAlgo quotes API internally
+   * Uses layr0-IMC quotes API internally
 3. **Valid API Key**
    * API key must be active and valid
-   * Get API key from OpenAlgo settings
+   * Get API key from layr0-IMC settings
 
 ### Sample API Request (NFO - NIFTY Option with Auto-Detected Spot)
 
@@ -764,7 +764,7 @@ MCX Option (CRUDEOIL17NOV255400CE):
 | Option has expired               | Expiry date in the past      | Use current month contracts                  |
 | Failed to fetch underlying price | Underlying symbol not found  | Verify symbol and exchange                   |
 | Option LTP not available         | No trading data for option   | Check market hours, symbol validity          |
-| Invalid openalgo apikey          | API key incorrect            | Verify API key in settings                   |
+| Invalid layr0-IMC apikey          | API key incorrect            | Verify API key in settings                   |
 
 ####
 
@@ -1238,5 +1238,5 @@ For issues or questions:
 * Verify mibian installation
 * Check symbol format matches documented pattern
 * Ensure markets are open for live data
-* Review OpenAlgo logs for detailed errors
+* Review layr0-IMC logs for detailed errors
 * Compare with broker Greeks to validate

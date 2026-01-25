@@ -1,8 +1,8 @@
 """
-Example of fetching 5-minute historical data from OpenAlgo
+Example of fetching 5-minute historical data from layr0-IMC
 """
 
-from openalgo import api
+from layr0-IMC import api
 from datetime import datetime, timedelta
 import pandas as pd
 

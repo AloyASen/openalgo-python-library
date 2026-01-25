@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Technical Indicators - Momentum Indicators
+layr0-IMC Technical Indicators - Momentum Indicators
 """
 
 import numpy as np

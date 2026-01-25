@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Technical Indicators - Hybrid and Advanced Indicators
+layr0-IMC Technical Indicators - Hybrid and Advanced Indicators
 """
 
 import numpy as np
 import pandas as pd
-from openalgo.numba_shim import jit
+from layr0-IMC.numba_shim import jit
 from typing import Union, Tuple, Optional
 from .base import BaseIndicator
 from .utils import true_range, ema_wilder

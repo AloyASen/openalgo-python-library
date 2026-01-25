@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo REST API Documentation - Account Methods
-    https://docs.openalgo.in
+layr0-IMC REST API Documentation - Account Methods
+    https://docs.layr0-IMC.in
 """
 
 import httpx
@@ -10,7 +10,7 @@ from .base import BaseAPI
 
 class AccountAPI(BaseAPI):
     """
-    Account management API methods for OpenAlgo.
+    Account management API methods for layr0-IMC.
     Inherits from the BaseAPI class.
     """
 

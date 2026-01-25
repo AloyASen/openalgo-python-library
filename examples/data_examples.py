@@ -1,8 +1,8 @@
 """
-OpenAlgo Market Data Examples
+layr0-IMC Market Data Examples
 """
 
-from openalgo import api
+from layr0-IMC import api
 import json
 from datetime import datetime, timedelta
 import pandas as pd

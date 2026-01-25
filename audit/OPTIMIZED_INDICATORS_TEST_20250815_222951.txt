@@ -1,4 +1,4 @@
-OpenAlgo Optimized Indicators Performance Test Results
+layr0-IMC Optimized Indicators Performance Test Results
 ============================================================
 Test Date: 2025-08-15 22:29:51
 Data Points: 1,000,000

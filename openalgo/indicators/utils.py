@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Technical Indicators - Utility Functions
+layr0-IMC Technical Indicators - Utility Functions
 """
 
 import numpy as np
 import pandas as pd
-from openalgo.numba_shim import jit, njit, prange
+from layr0-IMC.numba_shim import jit, njit, prange
 from typing import Union, Optional
 
 

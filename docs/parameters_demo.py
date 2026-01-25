@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-OpenAlgo Technical Indicators - Parameters Demo
+layr0-IMC Technical Indicators - Parameters Demo
 
 This script demonstrates the difference between mandatory and optional parameters
-in the OpenAlgo technical indicators library.
+in the layr0-IMC technical indicators library.
 """
 
 import numpy as np
-from openalgo import ta
+from layr0-IMC import ta
 
 # Generate sample data
 np.random.seed(42)
@@ -17,7 +17,7 @@ high = close + np.random.uniform(0, 2, n)
 low = close - np.random.uniform(0, 2, n)
 volume = np.random.randint(10000, 100000, n)
 
-print("*** OpenAlgo Technical Indicators - Parameters Demo ***")
+print("*** layr0-IMC Technical Indicators - Parameters Demo ***")
 print("=" * 60)
 
 print("\nMANDATORY vs OPTIONAL Parameters Examples")

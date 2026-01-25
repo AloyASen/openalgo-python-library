@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Python Library
+layr0-IMC Python Library
 """
 
 from .base import BaseAPI
@@ -23,18 +23,18 @@ from numba import prange as _prange  # noqa: E402
 
 _nb.jit = _jit_shim  # monkey-patch once at import time
 
-# Make shim available as openalgo.nbjit if users want it explicitly
+# Make shim available as layr0-IMC.nbjit if users want it explicitly
 nbjit = _jit_shim
 prange = _prange
 
 class api(OrderAPI, DataAPI, AccountAPI, FeedAPI, OptionsAPI, TelegramAPI, UtilitiesAPI):
     """
-    OpenAlgo API client class
+    layr0-IMC API client class
     """
     def __init__(self, api_key, host="http://127.0.0.1:5000", version="v1", timeout=120.0,
                  ws_port=8765, ws_url=None, verbose=False):
         """
-        Initialize the OpenAlgo API client.
+        Initialize the layr0-IMC API client.
 
         Args:
             api_key (str): User's API key.

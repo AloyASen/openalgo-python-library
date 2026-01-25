@@ -1,11 +1,11 @@
 """
-OpenAlgo Supertrend Strategy Example
+layr0-IMC Supertrend Strategy Example
 
 A complete example showing how to implement a Supertrend-based trading strategy
-using OpenAlgo's technical indicators and trading API.
+using layr0-IMC's technical indicators and trading API.
 """
 
-from openalgo import api, ta
+from layr0-IMC import api, ta
 import pandas as pd
 import numpy as np
 import time
@@ -126,7 +126,7 @@ class SupertrendStrategy:
     
     def execute_trade(self, symbol, exchange, action, quantity, strategy_name="Supertrend"):
         """
-        Execute a trade using OpenAlgo API
+        Execute a trade using layr0-IMC API
         """
         try:
             response = self.client.placeorder(
@@ -340,7 +340,7 @@ def main():
     SYMBOL = "RELIANCE"
     EXCHANGE = "NSE"
     
-    print("OpenAlgo Supertrend Strategy")
+    print("layr0-IMC Supertrend Strategy")
     print("============================\n")
     
     # Initialize strategy

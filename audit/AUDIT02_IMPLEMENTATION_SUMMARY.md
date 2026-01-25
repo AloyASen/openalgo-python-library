@@ -10,7 +10,7 @@ Successfully implemented the highest-impact optimizations identified in **Audit 
 
 #### 1. **JIT Shim Adoption** 
 - **Status**: ✅ Complete
-- **Action**: Switched from `numba.jit` to `openalgo.numba_shim.jit` across all modules
+- **Action**: Switched from `numba.jit` to `layr0-IMC.numba_shim.jit` across all modules
 - **Benefits**: Standardized `fastmath=True`, `cache=True`, and `nopython=True` defaults
 - **Files Updated**: `utils.py`, `base.py`, `volatility.py`, `trend.py`
 
@@ -125,10 +125,10 @@ Successfully implemented the highest-impact optimizations identified in **Audit 
 ## Files Modified
 
 ### **Core Optimizations**
-- `openalgo/indicators/utils.py` - Added optimized kernel utilities
-- `openalgo/indicators/volatility.py` - BollingerBands, Donchian optimizations + JIT shim
-- `openalgo/indicators/trend.py` - VWMA, KAMA optimizations + JIT shim  
-- `openalgo/indicators/base.py` - JIT shim adoption
+- `layr0-IMC/indicators/utils.py` - Added optimized kernel utilities
+- `layr0-IMC/indicators/volatility.py` - BollingerBands, Donchian optimizations + JIT shim
+- `layr0-IMC/indicators/trend.py` - VWMA, KAMA optimizations + JIT shim  
+- `layr0-IMC/indicators/base.py` - JIT shim adoption
 
 ### **Testing & Documentation**
 - `docs/test_audit02_optimizations.py` - Audit 02 validation suite

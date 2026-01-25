@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo REST API Documentation - Order Methods
-    https://docs.openalgo.in
+layr0-IMC REST API Documentation - Order Methods
+    https://docs.layr0-IMC.in
 """
 
 import httpx
@@ -9,7 +9,7 @@ from .base import BaseAPI
 
 class OrderAPI(BaseAPI):
     """
-    Order management API methods for OpenAlgo.
+    Order management API methods for layr0-IMC.
     Inherits from the BaseAPI class.
     """
 

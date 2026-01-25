@@ -1,9 +1,9 @@
-### OpenAlgo Indicators Performance Audit (NumPy/Numba) — Audit 02
+### layr0-IMC Indicators Performance Audit (NumPy/Numba) — Audit 02
 
-This follow-up audit reflects recent refactors and optimizations. It validates progress and lists the remaining high-value improvements. References use module paths like `openalgo/indicators/*` and utilities in `openalgo/indicators/utils.py`.
+This follow-up audit reflects recent refactors and optimizations. It validates progress and lists the remaining high-value improvements. References use module paths like `layr0-IMC/indicators/*` and utilities in `layr0-IMC/indicators/utils.py`.
 
 ### What’s improved since Audit 01
-- **JIT shim available**: `openalgo/numba_shim.py` provides cached, fastmath-enabled `jit/njit/prange` defaults.
+- **JIT shim available**: `layr0-IMC/numba_shim.py` provides cached, fastmath-enabled `jit/njit/prange` defaults.
 - **Base rolling-window fix**: `BaseIndicator.rolling_window()` no longer attempts Numba on `as_strided`, preventing unsupported-call failures. A safe `rolling_window_numba()` exists.
 - **O(n) utility kernels added** (Numba, cached):
   - Rolling extrema: `utils.highest`, `utils.lowest` (deque-based)
@@ -16,7 +16,7 @@ These utilities enable broad O(n) refactors and reduce duplication.
 
 ### Remaining opportunities (highest impact first)
 - **Adopt the JIT shim everywhere**
-  - Many modules still use `from numba import jit`. Switch to `from openalgo.numba_shim import jit` (and `njit/prange`) across `trend.py`, `oscillators.py`, `volatility.py`, etc., to standardize `fastmath=True, cache=True`.
+  - Many modules still use `from numba import jit`. Switch to `from layr0-IMC.numba_shim import jit` (and `njit/prange`) across `trend.py`, `oscillators.py`, `volatility.py`, etc., to standardize `fastmath=True, cache=True`.
 
 - **Replace slice-in-loop rolling logic with O(n) utils**
   - **Volatility**:
@@ -47,7 +47,7 @@ These utilities enable broad O(n) refactors and reduce duplication.
 - `volatility.py`: Bollinger, STDDEV, RVI, Donchian, CHOP, UlcerIndex → replace per-window logic with `utils.stdev`, `utils.highest/lowest`, `utils.rolling_sum`, `utils.atr_*`.
 - `trend.py`: VWMA → `utils.vwma_optimized`; KAMA → `utils.kama_optimized`; Ichimoku ranges → `utils.highest/lowest`.
 - `oscillators.py`: AO/AC/PO/DPO/KST/AROONOSC → use `utils.sma/ema/roc` and deque-based ranges.
-- Across all: switch `numba.jit` to `openalgo.numba_shim.jit` and remove duplicated EMA/ATR kernels.
+- Across all: switch `numba.jit` to `layr0-IMC.numba_shim.jit` and remove duplicated EMA/ATR kernels.
 
 ### Expected impact
 - O(n) conversions on remaining hotspots typically yield 5–20× speedups on long series (larger gains for big `period`), with lower memory churn.

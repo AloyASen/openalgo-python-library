@@ -1,22 +1,22 @@
-# OpenAlgo Python Library
+# layr0-IMC Python Library
 
-A Python library for algorithmic trading using OpenAlgo's REST APIs. This library provides a comprehensive interface for order management, market data, account operations, and strategy automation.
+A Python library for algorithmic trading using layr0-IMC's REST APIs. This library provides a comprehensive interface for order management, market data, account operations, and strategy automation.
 
 ## Installation
 
 ```bash
-pip install openalgo
+pip install layr0-IMC
 ```
 
 ## Quick Start
 
 ```python
-from openalgo import api
+from layr0-IMC import api
 
 # Initialize the client
 client = api(
     api_key="your_api_key",
-    host="http://127.0.0.1:5000"  # or your OpenAlgo server URL
+    host="http://127.0.0.1:5000"  # or your layr0-IMC server URL
 )
 ```
 
@@ -25,16 +25,16 @@ client = api(
 ### 1. Strategy API
 
 #### Strategy Management Module
-OpenAlgo's Strategy Management Module allows you to automate your trading strategies using webhooks. This enables seamless integration with any platform or custom system that can send HTTP requests. The Strategy class provides a simple interface to send signals that trigger orders based on your strategy configuration in OpenAlgo.
+layr0-IMC's Strategy Management Module allows you to automate your trading strategies using webhooks. This enables seamless integration with any platform or custom system that can send HTTP requests. The Strategy class provides a simple interface to send signals that trigger orders based on your strategy configuration in layr0-IMC.
 
 ```python
-from openalgo import Strategy
+from layr0-IMC import Strategy
 import requests
 
 # Initialize strategy client
 client = Strategy(
-    host_url="http://127.0.0.1:5000",  # Your OpenAlgo server URL
-    webhook_id="your-webhook-id"        # Get this from OpenAlgo strategy section
+    host_url="http://127.0.0.1:5000",  # Your layr0-IMC server URL
+    webhook_id="your-webhook-id"        # Get this from layr0-IMC strategy section
 )
 
 try:
@@ -374,7 +374,7 @@ The WebSocket Feed API provides real-time market data through WebSocket connecti
 #### LTP (Last Traded Price) Feed
 Get real-time LTP updates for multiple instruments:
 ```python
-from openalgo import api
+from layr0-IMC import api
 import time
 
 # Initialize the client with explicit WebSocket URL
@@ -412,7 +412,7 @@ client.disconnect()
 #### Quote Feed
 Get real-time quote updates with OHLC data:
 ```python
-from openalgo import api
+from layr0-IMC import api
 
 # Initialize the client
 client = api(
@@ -450,7 +450,7 @@ client.disconnect()
 #### Market Depth Feed
 Get real-time market depth (order book) data:
 ```python
-from openalgo import api
+from layr0-IMC import api
 
 # Initialize the client
 client = api(
@@ -864,14 +864,14 @@ client.optionsorder(
 Send custom alert messages to Telegram users for real-time trading notifications.
 
 **Prerequisites:**
-1. Telegram Bot must be running in OpenAlgo settings
+1. Telegram Bot must be running in layr0-IMC settings
 2. User must link account using `/link` command in Telegram
-3. Username is your OpenAlgo login username (NOT Telegram @username)
+3. Username is your layr0-IMC login username (NOT Telegram @username)
 
 ```python
 # Basic notification
 result = client.telegram(
-    username="john_trader",  # Your OpenAlgo login username
+    username="john_trader",  # Your layr0-IMC login username
     message="NIFTY crossed 24000! Consider taking profit."
 )
 
@@ -996,7 +996,7 @@ Check the examples directory for detailed usage:
 
 ## Publishing to PyPI
 
-1. Update version in `openalgo/__init__.py`
+1. Update version in `layr0-IMC/__init__.py`
 
 2. Build the distribution:
 ```bash

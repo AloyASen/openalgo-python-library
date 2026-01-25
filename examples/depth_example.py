@@ -1,5 +1,5 @@
 """
-OpenAlgo WebSocket Market Depth Example
+layr0-IMC WebSocket Market Depth Example
 
 Verbose levels:
   - verbose=False (default): Silent mode - no SDK output, only your prints
@@ -7,7 +7,7 @@ Verbose levels:
   - verbose=2: Full debug - all market data updates from SDK (includes depth table)
 """
 
-from openalgo import api
+from layr0-IMC import api
 import time
 
 # Initialize feed client with explicit parameters

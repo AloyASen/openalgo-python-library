@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Account API Test Examples
+layr0-IMC Account API Test Examples
 """
 
-from openalgo import api
+from layr0-IMC import api
 
 def main():
     # Initialize API with test credentials

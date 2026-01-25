@@ -1,8 +1,8 @@
-# OpenAlgo Trading Strategies Examples
+# layr0-IMC Trading Strategies Examples
 
 ## 🏆 WORLD-CLASS TECHNICAL ANALYSIS STRATEGIES
 
-This document provides real-world trading strategy examples using OpenAlgo's **PERFECT 104/104 (100%) validated** technical indicators library. All strategies leverage indicators with **unprecedented reliability** and **sub-millisecond performance**.
+This document provides real-world trading strategy examples using layr0-IMC's **PERFECT 104/104 (100%) validated** technical indicators library. All strategies leverage indicators with **unprecedented reliability** and **sub-millisecond performance**.
 
 ### 🎯 **PERFECT VALIDATION ACHIEVED**
 - ✅ **104/104 indicators working** (100% success rate)
@@ -28,7 +28,7 @@ This document provides real-world trading strategy examples using OpenAlgo's **P
 ### 1. Classic Moving Average Crossover
 
 ```python
-from openalgo import ta
+from layr0-IMC import ta
 import numpy as np
 
 class MovingAverageCrossover:
@@ -1084,4 +1084,4 @@ class AdvancedRiskManager:
 
 ---
 
-This comprehensive guide provides real-world trading strategy examples using OpenAlgo's technical indicators. Each strategy includes complete implementation with signal generation, risk management, and practical considerations for live trading.
+This comprehensive guide provides real-world trading strategy examples using layr0-IMC's technical indicators. Each strategy includes complete implementation with signal generation, risk management, and practical considerations for live trading.

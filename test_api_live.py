@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Test OpenAlgo API with live connection
+Test layr0-IMC API with live connection
 Testing margin function and NIFTY expiry dates
 """
 
-from openalgo import api
+from layr0-IMC import api
 from datetime import datetime
 import json
 
@@ -16,7 +16,7 @@ client = api(api_key=API_KEY, host="http://127.0.0.1:5000")
 def test_connection():
     """Test basic API connection"""
     print("\n" + "="*60)
-    print("Testing OpenAlgo API Connection")
+    print("Testing layr0-IMC API Connection")
     print("="*60)
 
     try:
@@ -215,7 +215,7 @@ def test_margin_function():
 def main():
     """Run all tests"""
     print("\n" + "="*60)
-    print("OpenAlgo API Test Suite v1.0.36")
+    print("layr0-IMC API Test Suite v1.0.36")
     print("Testing with API Key: " + API_KEY[:10] + "..." + API_KEY[-10:])
     print("="*60)
 
@@ -231,9 +231,9 @@ def main():
     else:
         print("\n❌ Cannot proceed with other tests due to connection failure")
         print("Please ensure:")
-        print("1. OpenAlgo server is running at http://127.0.0.1:5000")
+        print("1. layr0-IMC server is running at http://127.0.0.1:5000")
         print("2. The API key is valid")
-        print("3. The broker is connected in OpenAlgo")
+        print("3. The broker is connected in layr0-IMC")
 
     print("\n" + "="*60)
     print("Test Suite Completed")

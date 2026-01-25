@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo WebSocket API Documentation - Feed Methods
-    https://docs.openalgo.in
+layr0-IMC WebSocket API Documentation - Feed Methods
+    https://docs.layr0-IMC.in
 """
 
 import json
@@ -13,7 +13,7 @@ from .base import BaseAPI
 
 class FeedAPI(BaseAPI):
     """
-    Market data feed API methods for OpenAlgo using WebSockets.
+    Market data feed API methods for layr0-IMC using WebSockets.
     Inherits from the BaseAPI class.
     """
 

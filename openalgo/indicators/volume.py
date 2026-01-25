@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Technical Indicators - Volume Indicators
+layr0-IMC Technical Indicators - Volume Indicators
 """
 
 import numpy as np

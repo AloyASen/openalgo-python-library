@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo Order API Test Examples
+layr0-IMC Order API Test Examples
 """
 
-from openalgo import api
+from layr0-IMC import api
 import time
 
 def main():

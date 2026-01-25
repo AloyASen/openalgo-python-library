@@ -1,4 +1,4 @@
-# OpenAlgo Technical Indicators - Parameters Reference
+# layr0-IMC Technical Indicators - Parameters Reference
 
 This document provides a comprehensive reference for all indicator function parameters, clearly distinguishing between **mandatory** and **optional** parameters with their default values.
 
@@ -1226,7 +1226,7 @@ ta.stdev(data, period)
 
 ### Using Default Parameters
 ```python
-from openalgo import ta
+from layr0-IMC import ta
 import numpy as np
 
 # Sample data

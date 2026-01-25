@@ -1,4 +1,4 @@
-# OpenAlgo Technical Indicators - Function Abbreviations
+# layr0-IMC Technical Indicators - Function Abbreviations
 
 1. ta.accelerator_oscillator() - AC
 2. ta.adl() - ADL

@@ -4,7 +4,7 @@
 Test script for instruments() function
 """
 
-from openalgo import api
+from layr0-IMC import api
 
 # API credentials
 API_KEY = "c32eb9dee6673190bb9dfab5f18ef0a96b0d76ba484cd36bc5ca5f7ebc8745bf"

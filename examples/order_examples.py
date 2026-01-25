@@ -1,8 +1,8 @@
 """
-OpenAlgo Order Management Examples
+layr0-IMC Order Management Examples
 """
 
-from openalgo import api
+from layr0-IMC import api
 import json
 
 def print_response(title, response):

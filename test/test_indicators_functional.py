@@ -4,7 +4,7 @@ Functional test to verify technical indicators work correctly
 """
 
 import numpy as np
-from openalgo import ta
+from layr0-IMC import ta
 
 def test_indicators():
     print("🧪 FUNCTIONAL TESTING OF TECHNICAL INDICATORS")

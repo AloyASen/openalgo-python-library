@@ -1,4 +1,4 @@
-# OpenAlgo WebSocket Verbose Control
+# layr0-IMC WebSocket Verbose Control
 
 ## Overview
 
@@ -13,7 +13,7 @@ The `verbose` parameter controls SDK logging output for WebSocket feed operation
 ## Usage
 
 ```python
-from openalgo import api
+from layr0-IMC import api
 
 # Silent mode (default) - no SDK output
 client = api(api_key="...", host="...", ws_url="...", verbose=False)
@@ -29,9 +29,9 @@ client = api(api_key="...", host="...", ws_url="...", verbose=2)
 
 ```python
 """
-Test verbose control in OpenAlgo WebSocket Feed
+Test verbose control in layr0-IMC WebSocket Feed
 """
-from openalgo import api
+from layr0-IMC import api
 import time
 
 # Change this to test different levels: False, True, 1, 2

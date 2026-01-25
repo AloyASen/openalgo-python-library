@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-OpenAlgo REST API Documentation - Base API Class
-    https://docs.openalgo.in
+layr0-IMC REST API Documentation - Base API Class
+    https://docs.layr0-IMC.in
 """
 
 import httpx
 
 class BaseAPI:
     """
-    Base class to handle all the API calls to OpenAlgo.
+    Base class to handle all the API calls to layr0-IMC.
     """
 
     def __init__(self, api_key, host="http://127.0.0.1:5000", version="v1", timeout=120.0):

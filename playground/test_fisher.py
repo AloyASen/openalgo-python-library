@@ -7,7 +7,7 @@ import os
 # Add the parent directory to path to use our current testing version
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from openalgo import ta
+from layr0-IMC import ta
 import numpy as np
 
 def test_fisher_basic():

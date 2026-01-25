@@ -2,7 +2,7 @@
 Configuration for playground testing
 """
 
-# OpenAlgo API Configuration
+# layr0-IMC API Configuration
 # Update these values with your actual settings
 
 API_KEY = '91300b85a12a7c3c5c7fb091b6a8f17f94222a41a339d3e76640cf9bf4831350'

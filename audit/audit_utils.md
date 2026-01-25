@@ -1,4 +1,4 @@
-# Utility Functions Audit (openalgo.indicators.utils)
+# Utility Functions Audit (layr0-IMC.indicators.utils)
 
 _Date_: 2025-06-11 19:38 IST_
 
@@ -38,7 +38,7 @@ _Date_: 2025-06-11 19:38 IST_
 ```python
 import numpy as np, pandas as pd, talib
 x = np.random.random(300)
-utils_ema = openalgo.indicators.utils.ema(x, 20)
+utils_ema = layr0-IMC.indicators.utils.ema(x, 20)
 talib_ema = talib.EMA(x, 20)
 mae = np.nanmean(np.abs(utils_ema - talib_ema))  # 4.1e-10
 ```
