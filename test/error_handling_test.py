@@ -1,5 +1,5 @@
 """
-layr0-IMC Error Handling Test
+layr0_imc Error Handling Test
 Tests the improved error handling for connection timeouts and other network errors.
 """
 
@@ -7,7 +7,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from layr0-IMC import api
+from layr0_imc import api
 import json
 import time
 
@@ -149,7 +149,7 @@ def test_different_error_types():
     print_response("AccountAPI Connection Error", response)
 
 if __name__ == "__main__":
-    print("🚀 layr0-IMC ERROR HANDLING TEST")
+    print("🚀 layr0_imc ERROR HANDLING TEST")
     print("=" * 60)
     print("Testing improved error handling for:")
     print("- Connection timeouts")

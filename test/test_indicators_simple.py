@@ -6,56 +6,56 @@ without requiring external dependencies.
 
 # Test basic imports
 try:
-    from layr0-IMC.indicators.base import BaseIndicator
+    from layr0_imc.indicators.base import BaseIndicator
     print("✅ Base indicator import successful")
 except ImportError as e:
     print(f"❌ Base indicator import failed: {e}")
 
 try:
-    from layr0-IMC.indicators.trend import SMA, EMA
+    from layr0_imc.indicators.trend import SMA, EMA
     print("✅ Trend indicators import successful")
 except ImportError as e:
     print(f"❌ Trend indicators import failed: {e}")
 
 try:
-    from layr0-IMC.indicators.momentum import RSI, MACD
+    from layr0_imc.indicators.momentum import RSI, MACD
     print("✅ Momentum indicators import successful")
 except ImportError as e:
     print(f"❌ Momentum indicators import failed: {e}")
 
 try:
-    from layr0-IMC.indicators.volatility import ATR, BollingerBands
+    from layr0_imc.indicators.volatility import ATR, BollingerBands
     print("✅ Volatility indicators import successful")
 except ImportError as e:
     print(f"❌ Volatility indicators import failed: {e}")
 
 try:
-    from layr0-IMC.indicators.volume import OBV, VWAP
+    from layr0_imc.indicators.volume import OBV, VWAP
     print("✅ Volume indicators import successful")
 except ImportError as e:
     print(f"❌ Volume indicators import failed: {e}")
 
 try:
-    from layr0-IMC.indicators.oscillators import ROC, CMO
+    from layr0_imc.indicators.oscillators import ROC, CMO
     print("✅ Oscillator indicators import successful")
 except ImportError as e:
     print(f"❌ Oscillator indicators import failed: {e}")
 
 try:
-    from layr0-IMC.indicators.statistics import LINEARREG, CORREL
+    from layr0_imc.indicators.statistics import LINEARREG, CORREL
     print("✅ Statistical indicators import successful")
 except ImportError as e:
     print(f"❌ Statistical indicators import failed: {e}")
 
 try:
-    from layr0-IMC.indicators.hybrid import ADX, PivotPoints
+    from layr0_imc.indicators.hybrid import ADX, PivotPoints
     print("✅ Hybrid indicators import successful")
 except ImportError as e:
     print(f"❌ Hybrid indicators import failed: {e}")
 
 # Test main TA interface
 try:
-    from layr0-IMC.indicators import ta, TechnicalAnalysis
+    from layr0_imc.indicators import ta, TechnicalAnalysis
     print("✅ Main TA interface import successful")
     
     # Test creating TA instance
@@ -78,11 +78,11 @@ except ImportError as e:
 except Exception as e:
     print(f"❌ TA interface test failed: {e}")
 
-# Test integration with main layr0-IMC
+# Test integration with main layr0_imc
 try:
-    from layr0-IMC import ta as global_ta
+    from layr0_imc import ta as global_ta
     print("✅ Global TA interface import successful")
-    print("✅ Technical indicators successfully integrated into layr0-IMC!")
+    print("✅ Technical indicators successfully integrated into layr0_imc!")
 except ImportError as e:
     print(f"❌ Global TA interface import failed: {e}")
 
@@ -100,7 +100,7 @@ print("  • Statistical Indicators (8): Linear Regression, LR Slope, Correlatio
 print("  • Hybrid Indicators (7): ADX, Aroon, Pivot Points, SAR, DMI, PSAR, HT Trendline")
 
 print("\n🚀 Usage Examples:")
-print("  from layr0-IMC import ta")
+print("  from layr0_imc import ta")
 print("  ")
 print("  # Trend indicators")
 print("  sma_20 = ta.sma(close, 20)")

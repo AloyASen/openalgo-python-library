@@ -1,15 +1,15 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="layr0-IMC",
+    name="layr0_imc",
     version="1.0.45",
     author="Rajandran R",
-    author_email="rajandran@layr0-IMC.in",
-    description="A Python library for interacting with layr0-IMC's trading APIs with high-performance technical indicators",
+    author_email="rajandran@layr0_imc.in",
+    description="A Python library for interacting with layr0_imc's trading APIs with high-performance technical indicators",
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type="text/markdown",
-    url="https://layr0-IMC.in",
-    packages=find_packages(),
+    url="https://layr0_imc.in",
+    packages=find_packages(include=["layr0_imc", "layr0_imc.*"]),
     install_requires=[
         "httpx>=0.23.0",
         "pandas>=1.2.0",
@@ -45,7 +45,7 @@ setup(
         "real-time", 
         "stock-market",
         "api-wrapper",
-        "layr0-IMC",
+        "layr0_imc",
         "market-data",
         "trading-api",
         "stock-trading",
@@ -61,8 +61,8 @@ setup(
         "volume-analysis"
     ],
     project_urls={
-        "Documentation": "https://docs.layr0-IMC.in",
-        "Source": "https://github.com/layr0-IMC/layr0-IMC-python",
-        "Tracker": "https://github.com/layr0-IMC/layr0-IMC-python/issues",
+        "Documentation": "https://docs.layr0_imc.in",
+        "Source": "https://github.com/layr0_imc/layr0_imc-python",
+        "Tracker": "https://github.com/layr0_imc/layr0_imc-python/issues",
     },
 )

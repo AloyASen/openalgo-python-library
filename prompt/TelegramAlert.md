@@ -13,15 +13,15 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/telegram/notify
 ### Prerequisites
 
 1. **Telegram Bot Must Be Running**
-   * Start the bot from layr0-IMC Telegram settings
+   * Start the bot from layr0_imc Telegram settings
    * Bot must be active to send alerts
 2. **User Must Be Linked**
    * User must have linked their account using `/link` command in Telegram
-   * Username in API request must match your layr0-IMC login username (the username you use to login to layr0-IMC app)
+   * Username in API request must match your layr0_imc login username (the username you use to login to layr0_imc app)
    * This is NOT your Telegram username
 3. **Valid API Key**
    * API key must be active and valid
-   * Get API key from layr0-IMC settings
+   * Get API key from layr0_imc settings
 
 ### Sample API Request (Basic Notification)
 
@@ -33,7 +33,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/telegram/notify
 }
 ```
 
-**Note**: `username` should be your layr0-IMC login username (e.g., "john\_trader"), not your Telegram username (e.g., @johntrader).
+**Note**: `username` should be your layr0_imc login username (e.g., "john\_trader"), not your Telegram username (e.g., @johntrader).
 
 ####
 
@@ -79,7 +79,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/telegram/notify
 | Parameters | Description                                                                                 | Mandatory/Optional | Default Value |
 | ---------- | ------------------------------------------------------------------------------------------- | ------------------ | ------------- |
 | apikey     | App API key                                                                                 | Mandatory          | -             |
-| username   | layr0-IMC login username (the username used to login to layr0-IMC app, NOT Telegram username) | Mandatory          | -             |
+| username   | layr0_imc login username (the username used to login to layr0_imc app, NOT Telegram username) | Mandatory          | -             |
 | message    | Alert message to send                                                                       | Mandatory          | -             |
 | priority   | Message priority (1-10, higher = more urgent)                                               | Optional           | 5             |
 
@@ -197,7 +197,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/telegram/notify
 }
 ```
 
-**Common Cause**: Using Telegram username instead of layr0-IMC login username. Use the username you login to layr0-IMC with, not your @telegram\_handle.
+**Common Cause**: Using Telegram username instead of layr0_imc login username. Use the username you login to layr0_imc with, not your @telegram\_handle.
 
 #### Missing Parameters
 
@@ -224,7 +224,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/telegram/notify
 | Error Message                            | Cause                                              | Solution                                                                              |
 | ---------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | Invalid or missing API key               | API key is incorrect or expired                    | Check API key in settings                                                             |
-| User not found or not linked to Telegram | User hasn't linked account OR using wrong username | Use layr0-IMC login username (not Telegram username). Link account via `/link` command |
+| User not found or not linked to Telegram | User hasn't linked account OR using wrong username | Use layr0_imc login username (not Telegram username). Link account via `/link` command |
 | Username and message are required        | Missing required fields                            | Provide username and message                                                          |
 | Failed to send notification              | Bot is not running                                 | Start bot from Telegram settings                                                      |
 
@@ -267,7 +267,7 @@ Use `\n` for line breaks in JSON strings.
 
 ### Best Practices
 
-1. **Use Correct Username**: Always use your layr0-IMC login username (the one you use to login to layr0-IMC app), NOT your Telegram username (@handle)
+1. **Use Correct Username**: Always use your layr0_imc login username (the one you use to login to layr0_imc app), NOT your Telegram username (@handle)
 2. **Keep Messages Concise**: Short, actionable messages work best
 3. **Use Emojis Wisely**: Emojis improve readability but don't overuse
 4. **Set Appropriate Priority**: Reserve high priority (9-10) for urgent alerts only
@@ -413,10 +413,10 @@ if daily_loss >= max_loss_limit:
 
 #### Alert Not Received
 
-1. **Check Bot Status**: Ensure bot is running in layr0-IMC settings
+1. **Check Bot Status**: Ensure bot is running in layr0_imc settings
 2. **Verify Username**: Confirm username matches linked account (case-sensitive)
 3. **Check Linking**: User must have linked account via `/link` command
-4. **Review Logs**: Check layr0-IMC logs for error messages
+4. **Review Logs**: Check layr0_imc logs for error messages
 5. **Test Connection**: Use `/status` command in Telegram bot
 
 #### Delivery Delays
@@ -459,7 +459,7 @@ if daily_loss >= max_loss_limit:
 
 For issues or questions:
 
-* Check bot status in layr0-IMC Telegram settings
+* Check bot status in layr0_imc Telegram settings
 * Verify user is linked via `/status` command in Telegram
 * Review API response for specific error messages
-* Check layr0-IMC logs for detailed error information
+* Check layr0_imc logs for detailed error information

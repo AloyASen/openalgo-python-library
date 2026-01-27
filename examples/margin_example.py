@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-layr0-IMC Margin Calculation Examples
+layr0_imc Margin Calculation Examples
 
 This script demonstrates how to use the margin() function to calculate
 margin requirements for single and multiple positions.
 """
 
-from layr0-IMC import api
+from layr0_imc import api
 
 # Initialize the API client
 client = api(api_key="your_api_key_here", host="http://127.0.0.1:5000")
@@ -197,7 +197,7 @@ def test_stop_loss_order():
 def main():
     """Run all margin calculation examples"""
     print("=" * 60)
-    print("layr0-IMC Margin Calculator Examples")
+    print("layr0_imc Margin Calculator Examples")
     print("=" * 60)
 
     # Run examples

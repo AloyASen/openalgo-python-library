@@ -1,5 +1,5 @@
 """
-layr0-IMC Strategy Module for TradingView Integration
+layr0_imc Strategy Module for TradingView Integration
 """
 
 from typing import Optional
@@ -11,8 +11,8 @@ class Strategy:
         Initialize strategy with host URL and webhook ID
         
         Args:
-            host_url (str): layr0-IMC server URL (e.g., "http://127.0.0.1:5000")
-            webhook_id (str): Strategy's webhook ID from layr0-IMC
+            host_url (str): layr0_imc server URL (e.g., "http://127.0.0.1:5000")
+            webhook_id (str): Strategy's webhook ID from layr0_imc
         """
         self._host_url = host_url.rstrip('/')
         self._webhook_id = webhook_id
@@ -29,8 +29,8 @@ class Strategy:
 
     def strategyorder(self, symbol: str, action: str, position_size: Optional[int] = None) -> dict:
         """
-        Send a strategy order via webhook to layr0-IMC.
-        The strategy mode (LONG_ONLY, SHORT_ONLY, BOTH) is configured in layr0-IMC.
+        Send a strategy order via webhook to layr0_imc.
+        The strategy mode (LONG_ONLY, SHORT_ONLY, BOTH) is configured in layr0_imc.
         
         Args:
             symbol (str): Trading symbol (e.g., "RELIANCE", "NIFTY")

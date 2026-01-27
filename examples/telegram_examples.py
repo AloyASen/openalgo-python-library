@@ -1,30 +1,30 @@
 """
-layr0-IMC Telegram Notification API Examples
+layr0_imc Telegram Notification API Examples
 
 This file demonstrates how to use the Telegram notification API to send
 custom alerts to Telegram users.
 
 Prerequisites:
-1. Telegram Bot must be running in layr0-IMC settings
+1. Telegram Bot must be running in layr0_imc settings
 2. User must be linked using /link command in Telegram
-3. Username must be your layr0-IMC login username (NOT Telegram username)
+3. Username must be your layr0_imc login username (NOT Telegram username)
 """
 
-import layr0-IMC
+import layr0_imc
 
 # Initialize the API client
 # Replace with your actual API key and host
-api = layr0-IMC.api(
+api = layr0_imc.api(
     api_key="your_api_key_here",
     host="http://127.0.0.1:5000"
 )
 
-# Replace with your layr0-IMC login username
-# NOTE: This is NOT your @telegram_username, it's the username you use to login to layr0-IMC
-USERNAME = "your_layr0-IMC_username"
+# Replace with your layr0_imc login username
+# NOTE: This is NOT your @telegram_username, it's the username you use to login to layr0_imc
+USERNAME = "your_layr0_imc_username"
 
 print("=" * 80)
-print("layr0-IMC Telegram Notification API Examples")
+print("layr0_imc Telegram Notification API Examples")
 print("=" * 80)
 
 # ============================================================================
@@ -305,8 +305,8 @@ print("\n" + "=" * 80)
 print("Examples completed!")
 print("=" * 80)
 print("\nNote: Make sure to:")
-print("1. Replace USERNAME with your layr0-IMC login username")
+print("1. Replace USERNAME with your layr0_imc login username")
 print("2. Replace api_key with your actual API key")
-print("3. Ensure Telegram bot is running in layr0-IMC settings")
+print("3. Ensure Telegram bot is running in layr0_imc settings")
 print("4. Ensure you've linked your account using /link command in Telegram")
 print("=" * 80)

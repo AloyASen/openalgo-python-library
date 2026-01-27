@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-layr0-IMC Technical Indicators - Parameters Demo
+layr0_imc Technical Indicators - Parameters Demo
 
 This script demonstrates the difference between mandatory and optional parameters
-in the layr0-IMC technical indicators library.
+in the layr0_imc technical indicators library.
 """
 
 import numpy as np
-from layr0-IMC import ta
+from layr0_imc import ta
 
 # Generate sample data
 np.random.seed(42)
@@ -17,7 +17,7 @@ high = close + np.random.uniform(0, 2, n)
 low = close - np.random.uniform(0, 2, n)
 volume = np.random.randint(10000, 100000, n)
 
-print("*** layr0-IMC Technical Indicators - Parameters Demo ***")
+print("*** layr0_imc Technical Indicators - Parameters Demo ***")
 print("=" * 60)
 
 print("\nMANDATORY vs OPTIONAL Parameters Examples")

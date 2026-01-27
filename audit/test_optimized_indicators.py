@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-layr0-IMC Optimized Indicators Performance Test
+layr0_imc Optimized Indicators Performance Test
 =============================================
 
 Tests the three High Priority optimized indicators (VAR, VI, UI) 
@@ -24,10 +24,10 @@ import gc
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 try:
-    from layr0-IMC import ta
-    print("[SUCCESS] layr0-IMC imported successfully")
+    from layr0_imc import ta
+    print("[SUCCESS] layr0_imc imported successfully")
 except ImportError as e:
-    print(f"[ERROR] Error importing layr0-IMC: {e}")
+    print(f"[ERROR] Error importing layr0_imc: {e}")
     sys.exit(1)
 
 class OptimizedIndicatorTest:
@@ -264,7 +264,7 @@ class OptimizedIndicatorTest:
         filename = f"audit/OPTIMIZED_INDICATORS_TEST_{timestamp}.txt"
         
         with open(filename, 'w') as f:
-            f.write("layr0-IMC Optimized Indicators Performance Test Results\n")
+            f.write("layr0_imc Optimized Indicators Performance Test Results\n")
             f.write("=" * 60 + "\n")
             f.write(f"Test Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Data Points: {self.data_size:,}\n")
@@ -289,7 +289,7 @@ class OptimizedIndicatorTest:
 
 def main():
     """Main function to run the optimization test"""
-    print("[OPTIMIZATION TEST] layr0-IMC Optimized Indicators Performance Test")
+    print("[OPTIMIZATION TEST] layr0_imc Optimized Indicators Performance Test")
     print("=" * 70)
     
     # Run the optimization test with 1 million data points

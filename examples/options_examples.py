@@ -1,5 +1,5 @@
 """
-layr0-IMC Options API Examples
+layr0_imc Options API Examples
 
 This file demonstrates how to use the new Options API functions:
 1. optiongreeks - Calculate Option Greeks and IV
@@ -8,7 +8,7 @@ This file demonstrates how to use the new Options API functions:
 4. syntheticfuture - Calculate synthetic futures price
 """
 
-from layr0-IMC import api
+from layr0_imc import api
 
 # Initialize the API client
 # Replace with your actual API key and host
@@ -18,7 +18,7 @@ client = api(
 )
 
 print("=" * 80)
-print("layr0-IMC Options API Examples")
+print("layr0_imc Options API Examples")
 print("=" * 80)
 
 # ============================================================================

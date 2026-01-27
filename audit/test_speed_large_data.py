@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-layr0-IMC Technical Indicators - Large Data Speed Test
+layr0_imc Technical Indicators - Large Data Speed Test
 ====================================================
 
 Comprehensive speed testing on HDFCBANK.csv (~924K records)
@@ -26,10 +26,10 @@ import gc
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 try:
-    from layr0-IMC import ta
-    print("[SUCCESS] layr0-IMC imported successfully")
+    from layr0_imc import ta
+    print("[SUCCESS] layr0_imc imported successfully")
 except ImportError as e:
-    print(f"[ERROR] Error importing layr0-IMC: {e}")
+    print(f"[ERROR] Error importing layr0_imc: {e}")
     sys.exit(1)
 
 class LargeDataSpeedTest:
@@ -530,7 +530,7 @@ class LargeDataSpeedTest:
 
 def main():
     """Main function to run the speed test"""
-    print("[SPEED TEST] layr0-IMC Large Data Speed Test")
+    print("[SPEED TEST] layr0_imc Large Data Speed Test")
     print("=" * 50)
     
     # Check if data file exists

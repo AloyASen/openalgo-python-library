@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC Technical Indicators - Momentum Indicators
+layr0_imc Technical Indicators - Momentum Indicators
 """
 
 import numpy as np

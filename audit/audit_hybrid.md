@@ -1,4 +1,4 @@
-# Hybrid Indicators Audit (layr0-IMC.indicators.hybrid)
+# Hybrid Indicators Audit (layr0_imc.indicators.hybrid)
 
 _Date_: 2025-06-11 19:14 IST
 
@@ -24,7 +24,7 @@ Validated the following indicators:
 Only **ADX** required changes. All other hybrid indicators are functioning as expected.
 
 ---
-Committed fix in `layr0-IMC/indicators/hybrid.py` lines 60-105.
+Committed fix in `layr0_imc/indicators/hybrid.py` lines 60-105.
 
 ```diff
 + dx = np.full(n, np.nan)

@@ -1,4 +1,4 @@
-# Oscillators Indicators Audit (layr0-IMC.indicators.oscillators)
+# Oscillators Indicators Audit (layr0_imc.indicators.oscillators)
 
 _Date_: 2025-06-11 19:25 IST
 

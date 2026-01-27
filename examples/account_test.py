@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC Account API Test Examples
+layr0_imc Account API Test Examples
 """
 
-from layr0-IMC import api
+from layr0_imc import api
 
 def main():
     # Initialize API with test credentials

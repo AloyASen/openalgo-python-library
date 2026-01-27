@@ -1,13 +1,13 @@
-# layr0-IMC Technical Indicators - Quick Reference
+# layr0_imc Technical Indicators - Quick Reference
 
 ## Installation & Import
 
 ```python
-pip install layr0-IMC
+pip install layr0_imc
 ```
 
 ```python
-from layr0-IMC import ta
+from layr0_imc import ta
 import numpy as np
 ```
 
@@ -373,7 +373,7 @@ risk_amount = position_size_volatility(100000, 1, current_atr, avg_atr)
 ## Complete Strategy Template
 
 ```python
-from layr0-IMC import ta
+from layr0_imc import ta
 import numpy as np
 
 class TradingStrategy:
@@ -599,7 +599,7 @@ rwi_high, rwi_low = ta.rwi(high, low, close, period=14)
 
 ```python
 import numpy as np
-from layr0-IMC import ta
+from layr0_imc import ta
 
 # Sample data
 high = np.random.randn(100).cumsum() + 100

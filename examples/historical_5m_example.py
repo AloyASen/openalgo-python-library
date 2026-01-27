@@ -1,8 +1,8 @@
 """
-Example of fetching 5-minute historical data from layr0-IMC
+Example of fetching 5-minute historical data from layr0_imc
 """
 
-from layr0-IMC import api
+from layr0_imc import api
 from datetime import datetime, timedelta
 import pandas as pd
 

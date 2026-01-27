@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC Technical Indicators - Hybrid and Advanced Indicators
+layr0_imc Technical Indicators - Hybrid and Advanced Indicators
 """
 
 import numpy as np
 import pandas as pd
-from layr0-IMC.numba_shim import jit
+from layr0_imc.numba_shim import jit
 from typing import Union, Tuple, Optional
 from .base import BaseIndicator
 from .utils import true_range, ema_wilder

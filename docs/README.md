@@ -1,6 +1,6 @@
-# layr0-IMC Technical Indicators Documentation
+# layr0_imc Technical Indicators Documentation
 
-Welcome to the layr0-IMC Technical Indicators documentation. This comprehensive guide covers all 100+ technical analysis indicators available in the layr0-IMC library.
+Welcome to the layr0_imc Technical Indicators documentation. This comprehensive guide covers all 100+ technical analysis indicators available in the layr0_imc library.
 
 **Perfect Performance Achievement**: All 100+ indicators now working with 100% success rate across all dataset sizes (1K-100K+ data points).
 
@@ -42,12 +42,12 @@ Real-world implementation examples:
 
 ### Installation
 ```bash
-pip install layr0-IMC
+pip install layr0_imc
 ```
 
 ### Basic Usage
 ```python
-from layr0-IMC import ta
+from layr0_imc import ta
 import numpy as np
 
 # Example: Calculate SMA
@@ -93,7 +93,7 @@ The library provides indicators in 7 main categories:
 ## Example: Multi-Indicator Strategy
 
 ```python
-from layr0-IMC import ta
+from layr0_imc import ta
 
 def trading_signal(high, low, close, volume):
     # Trend
@@ -132,9 +132,9 @@ def trading_signal(high, low, close, volume):
 
 ## 📞 Support
 
-- **Documentation**: https://docs.layr0-IMC.in
-- **GitHub**: https://github.com/layr0-IMC/layr0-IMC-python
-- **Issues**: https://github.com/layr0-IMC/layr0-IMC-python/issues
+- **Documentation**: https://docs.layr0_imc.in
+- **GitHub**: https://github.com/layr0_imc/layr0_imc-python
+- **Issues**: https://github.com/layr0_imc/layr0_imc-python/issues
 
 ## Performance
 
@@ -155,7 +155,7 @@ All indicators optimized for maximum performance:
 
 ## 📝 License
 
-This documentation is part of the layr0-IMC project and is licensed under the MIT License.
+This documentation is part of the layr0_imc project and is licensed under the MIT License.
 
 ---
 

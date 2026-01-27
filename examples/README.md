@@ -1,10 +1,10 @@
-# layr0-IMC Examples
+# layr0_imc Examples
 
-This directory contains example scripts demonstrating the usage of layr0-IMC's Python API.
+This directory contains example scripts demonstrating the usage of layr0_imc's Python API.
 
 ## Setup
 
-Before running the examples, you need to install the layr0-IMC package in development mode. From the root directory of the project:
+Before running the examples, you need to install the layr0_imc package in development mode. From the root directory of the project:
 
 ```bash
 # Activate your virtual environment if you haven't already
@@ -75,4 +75,4 @@ api_key = "38f99d7d226cc0c3baa19dcacf0b1f049d2f68371da1dda2c97b1b63a3a9ca2e"
 host = "http://127.0.0.1:5000"
 ```
 
-Make sure your layr0-IMC server is running at the specified host before running the examples.
+Make sure your layr0_imc server is running at the specified host before running the examples.

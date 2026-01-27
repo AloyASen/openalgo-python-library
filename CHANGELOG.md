@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the layr0-IMC Python Library will be documented in this file.
+All notable changes to the layr0_imc Python Library will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Usage Example
 ```python
-from layr0-IMC import api
+from layr0_imc import api
 
 # Silent mode (default) - no SDK output
 client = api(api_key="...", host="...", ws_url="...", verbose=False)
@@ -136,7 +136,7 @@ df.to_csv('nse_instruments.csv', index=False)
 ### 📚 Usage Examples
 
 ```python
-from layr0-IMC import api
+from layr0_imc import api
 
 client = api(api_key="your_key", host="http://127.0.0.1:5000")
 
@@ -191,7 +191,7 @@ This release delivers **massive performance improvements** and achieves **100% i
 - **roc_oscillator**: Fixed to single parameter interface
 
 ### 🏗️ Technical Improvements
-- **Consistent API**: Perfect `from layr0-IMC import ta` usage pattern
+- **Consistent API**: Perfect `from layr0_imc import ta` usage pattern
 - **Memory Optimization**: Linear scaling maintained across all dataset sizes
 - **Production Ready**: Sub-millisecond performance for typical trading datasets
 - **Code Quality**: Eliminated redundant implementations and improved maintainability
@@ -206,7 +206,7 @@ This release delivers **massive performance improvements** and achieves **100% i
 
 ### 🎉 Major Technical Indicators Enhancement
 
-This release brings **complete technical analysis capabilities** to the layr0-IMC Python Library with **100% functional technical indicators**.
+This release brings **complete technical analysis capabilities** to the layr0_imc Python Library with **100% functional technical indicators**.
 
 ### ✅ Added
 - **Complete Technical Indicators Library**: All 102 technical analysis functions now working perfectly
@@ -250,7 +250,7 @@ This release brings **complete technical analysis capabilities** to the layr0-IM
 
 ### 🚀 Usage Examples
 ```python
-from layr0-IMC import ta
+from layr0_imc import ta
 import numpy as np
 
 # Sample price data

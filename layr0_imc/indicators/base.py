@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC Technical Indicators - Base Class
+layr0_imc Technical Indicators - Base Class
 """
 
 import numpy as np
 import pandas as pd
-from layr0-IMC.numba_shim import jit
+from layr0_imc.numba_shim import jit
 from abc import ABC, abstractmethod
 from typing import Union, Tuple, Optional, List
 

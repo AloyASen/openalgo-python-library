@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC REST API Documentation - Options Methods
-    https://docs.layr0-IMC.in
+layr0_imc REST API Documentation - Options Methods
+    https://docs.layr0_imc.in
 """
 
 import httpx
@@ -10,7 +10,7 @@ from .base import BaseAPI
 
 class OptionsAPI(BaseAPI):
     """
-    Options API methods for layr0-IMC.
+    Options API methods for layr0_imc.
     Inherits from the BaseAPI class.
     """
 

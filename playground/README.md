@@ -1,6 +1,6 @@
 # ADX Testing Playground
 
-This folder contains scripts to test the ADX indicator with real market data using the layr0-IMC API.
+This folder contains scripts to test the ADX indicator with real market data using the layr0_imc API.
 
 ## Files
 
@@ -10,7 +10,7 @@ This folder contains scripts to test the ADX indicator with real market data usi
 
 ## Setup
 
-1. Make sure your layr0-IMC server is running locally on `http://127.0.0.1:5001`
+1. Make sure your layr0_imc server is running locally on `http://127.0.0.1:5001`
 2. Update the API key in the test scripts with your actual key
 3. Run the test script:
 
@@ -41,7 +41,7 @@ python test_adx_real_data.py
 ## Troubleshooting
 
 If you get connection errors:
-1. Check if layr0-IMC server is running
+1. Check if layr0_imc server is running
 2. Verify your API key
 3. Update the host URL if needed
 4. The script will automatically fall back to sample data testing

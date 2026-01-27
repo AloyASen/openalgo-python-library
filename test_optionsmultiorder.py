@@ -4,7 +4,7 @@ Test script for optionsmultiorder function
 """
 
 import time
-from layr0-IMC import api
+from layr0_imc import api
 
 # Initialize with API key
 client = api(

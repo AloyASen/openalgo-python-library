@@ -1,14 +1,14 @@
-### layr0-IMC Indicators Performance Audit (NumPy/Numba) — Audit 01
+### layr0_imc Indicators Performance Audit (NumPy/Numba) — Audit 01
 
-This document summarizes a code-level audit of the technical indicators library with a focus on NumPy/Numba efficiency and speed optimizations. It references functions and classes as implemented under `layr0-IMC/indicators/*` and utility kernels in `layr0-IMC/indicators/utils.py`, and aligns the exposed API with `docs/FUNCTION_ABBREVIATIONS_LIST.md`.
+This document summarizes a code-level audit of the technical indicators library with a focus on NumPy/Numba efficiency and speed optimizations. It references functions and classes as implemented under `layr0_imc/indicators/*` and utility kernels in `layr0_imc/indicators/utils.py`, and aligns the exposed API with `docs/FUNCTION_ABBREVIATIONS_LIST.md`.
 
 ### Scope
 - Reviewed core modules: `trend.py`, `oscillators.py`, `volatility.py`, `momentum.py`, `statistics.py`, `hybrid.py`, `utils.py`, `base.py`, and interface in `__init__.py`.
 - Assessed: JIT usage, algorithmic complexity, array handling, duplication of kernels (EMA/ATR/SMA/STDDEV), and correctness implications.
 
 ### Framework-level improvements (global)
-- **Adopt a single JIT entrypoint**: Replace direct `from numba import jit` with the project’s `layr0-IMC.numba_shim.jit` (inherits `nopython=True`, `fastmath=True`, `cache=True`). Reduces warm-up latency, enables SIMD, and ensures consistent defaults across modules.
-- **Unify shared kernels**: Centralize common kernels (EMA, ATR variants, rolling SMA, rolling STDDEV) in `layr0-IMC/indicators/utils.py` and reuse everywhere to minimize compilation count and ensure consistent numerics.
+- **Adopt a single JIT entrypoint**: Replace direct `from numba import jit` with the project’s `layr0_imc.numba_shim.jit` (inherits `nopython=True`, `fastmath=True`, `cache=True`). Reduces warm-up latency, enables SIMD, and ensures consistent defaults across modules.
+- **Unify shared kernels**: Centralize common kernels (EMA, ATR variants, rolling SMA, rolling STDDEV) in `layr0_imc/indicators/utils.py` and reuse everywhere to minimize compilation count and ensure consistent numerics.
 - **Fix unsupported Numba call**: `BaseIndicator.rolling_window()` uses `np.lib.stride_tricks.as_strided` under `@jit(nopython=True)` which Numba does not support. Either remove Numba for this function or implement a supported approach. Leaving as-is risks runtime failure if invoked.
 - **Prefer O(n) rolling algorithms** over per-step slicing. Slice-based implementations are O(n×period) and allocate views repeatedly.
 
@@ -64,7 +64,7 @@ Convert slice-in-loop patterns to O(n) implementations using monotonic deques (f
 ### Correctness and maintenance notes
 - **NaN seeding semantics**: Preserve first-valid index behavior (typically at `period-1`) when refactoring to O(n). Many indicators rely on NaN seeds for alignment with charting expectations.
 - **As-strided JIT**: Ensure `BaseIndicator.rolling_window()` no longer uses Numba with `as_strided` or provide a pure-NumPy path without JIT to avoid runtime errors.
-- **Abbreviation coverage**: Public methods in `layr0-IMC/indicators/__init__.py` and aliases (e.g., `psar`/`parabolic_sar`, `bbpercent`, `bbwidth`, `ulcerindex`, `rwi`) align with `docs/FUNCTION_ABBREVIATIONS_LIST.md`. Keep a single canonical implementation per indicator and provide aliases only at the interface level.
+- **Abbreviation coverage**: Public methods in `layr0_imc/indicators/__init__.py` and aliases (e.g., `psar`/`parabolic_sar`, `bbpercent`, `bbwidth`, `ulcerindex`, `rwi`) align with `docs/FUNCTION_ABBREVIATIONS_LIST.md`. Keep a single canonical implementation per indicator and provide aliases only at the interface level.
 
 ### Expected performance impact (typical ranges)
 - **O(n) rolling conversions**: ~5–30× improvement on long series depending on `period` and indicator (e.g., `Donchian`, `Aroon`, `Ichimoku`, `Bollinger`, `STDDEV`, `RVI`, `CMO`, `KAMA`, `VWMA`, `UlcerIndex`, `CHOP`).
@@ -72,7 +72,7 @@ Convert slice-in-loop patterns to O(n) implementations using monotonic deques (f
 - **Stability**: Removing the unsupported `as_strided` JIT path avoids potential runtime failures.
 
 ### Actionable checklist
-- **JIT shim**: Use `layr0-IMC.numba_shim.jit` (and `njit/prange` from the same module) everywhere.
+- **JIT shim**: Use `layr0_imc.numba_shim.jit` (and `njit/prange` from the same module) everywhere.
 - **Refactor rolling windows**: Replace window slicing with O(n) algorithms: deque min/max, rolling sums, Welford variance, prefix sums.
 - **Consolidate kernels**: Single `ema`, two `atr` variants, rolling `sma/stddev` in `utils.py` and reuse.
 - **Optimize heavy indicators**: Prioritize `UlcerIndex`, `CHOP`, `VWMA`, `KAMA`, `CMO`, `Bollinger/STDDEV`, `Donchian`, `Aroon`, `Ichimoku`.

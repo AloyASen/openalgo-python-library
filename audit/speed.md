@@ -1,8 +1,8 @@
-# layr0-IMC Technical Indicators - Speed Benchmark Report
+# layr0_imc Technical Indicators - Speed Benchmark Report
 
 ## Executive Summary
 
-Comprehensive performance benchmarks for all 103 technical indicators in the layr0-IMC library, tested across three dataset sizes: 1,000, 10,000, and 100,000 data points.
+Comprehensive performance benchmarks for all 103 technical indicators in the layr0_imc library, tested across three dataset sizes: 1,000, 10,000, and 100,000 data points.
 
 ## Performance Overview
 
@@ -185,4 +185,4 @@ Comprehensive performance benchmarks for all 103 technical indicators in the lay
 
 ---
 *Report generated: 2025-08-14 18:45:54*
-*layr0-IMC version: 1.0.25*
+*layr0_imc version: 1.0.25*

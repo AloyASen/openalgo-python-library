@@ -1,4 +1,4 @@
-# Momentum Indicators Audit (layr0-IMC.indicators.momentum)
+# Momentum Indicators Audit (layr0_imc.indicators.momentum)
 
 _Date_: 2025-06-11 19:19 IST
 
@@ -22,7 +22,7 @@ No defects were discovered; **no code changes required**.
 
 ## Test Methodology
 1. Generated 2 000-bar synthetic OHLC data via geometric Brownian motion.
-2. Computed each indicator using `layr0-IMC.indicators.momentum` and TA-Lib equivalents.
+2. Computed each indicator using `layr0_imc.indicators.momentum` and TA-Lib equivalents.
 3. Compared arrays element-wise, ignoring leading NaNs. Required `mean(|diff|) < 1e-5`.
 4. Spot-checked on real BTC-USD daily data 2021-2024 – outputs overlapped visually.
 

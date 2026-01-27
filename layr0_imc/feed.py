@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC WebSocket API Documentation - Feed Methods
-    https://docs.layr0-IMC.in
+layr0_imc WebSocket API Documentation - Feed Methods
+    https://docs.layr0_imc.in
 """
 
 import json
@@ -13,7 +13,7 @@ from .base import BaseAPI
 
 class FeedAPI(BaseAPI):
     """
-    Market data feed API methods for layr0-IMC using WebSockets.
+    Market data feed API methods for layr0_imc using WebSockets.
     Inherits from the BaseAPI class.
     """
 

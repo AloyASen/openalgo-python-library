@@ -1,18 +1,18 @@
 """
-Example of using layr0-IMC strategy with client instance
+Example of using layr0_imc strategy with client instance
 """
 
-from layr0-IMC import Strategy
+from layr0_imc import Strategy
 import requests
 
-# Initialize client with your layr0-IMC server URL and webhook ID
+# Initialize client with your layr0_imc server URL and webhook ID
 client = Strategy(
-    host_url="http://127.0.0.1:5000",  # Your layr0-IMC server URL
-    webhook_id="your-webhook-id"        # Get this from layr0-IMC strategy section
+    host_url="http://127.0.0.1:5000",  # Your layr0_imc server URL
+    webhook_id="your-webhook-id"        # Get this from layr0_imc strategy section
 )
 
 try:
-    # Example 1: Long/Short only mode (configured in layr0-IMC)
+    # Example 1: Long/Short only mode (configured in layr0_imc)
     response = client.strategyorder("RELIANCE", "BUY")
     print(f"Order sent successfully: {response}")
 

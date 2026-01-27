@@ -1,11 +1,11 @@
 """
-layr0-IMC Supertrend Strategy Example
+layr0_imc Supertrend Strategy Example
 
 A complete example showing how to implement a Supertrend-based trading strategy
-using layr0-IMC's technical indicators and trading API.
+using layr0_imc's technical indicators and trading API.
 """
 
-from layr0-IMC import api, ta
+from layr0_imc import api, ta
 import pandas as pd
 import numpy as np
 import time
@@ -126,7 +126,7 @@ class SupertrendStrategy:
     
     def execute_trade(self, symbol, exchange, action, quantity, strategy_name="Supertrend"):
         """
-        Execute a trade using layr0-IMC API
+        Execute a trade using layr0_imc API
         """
         try:
             response = self.client.placeorder(
@@ -340,7 +340,7 @@ def main():
     SYMBOL = "RELIANCE"
     EXCHANGE = "NSE"
     
-    print("layr0-IMC Supertrend Strategy")
+    print("layr0_imc Supertrend Strategy")
     print("============================\n")
     
     # Initialize strategy

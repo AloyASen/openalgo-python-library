@@ -1,13 +1,13 @@
 """
-layr0-IMC Technical Indicators Examples
+layr0_imc Technical Indicators Examples
 
-This example demonstrates how to use the layr0-IMC technical indicators library
+This example demonstrates how to use the layr0_imc technical indicators library
 with both real market data and sample data.
 """
 
 import numpy as np
 import pandas as pd
-from layr0-IMC import api, ta
+from layr0_imc import api, ta
 
 def basic_indicators_example():
     """Basic usage of technical indicators with sample data"""
@@ -171,7 +171,7 @@ def strategy_example():
 
 
 def real_data_example():
-    """Example using real market data from layr0-IMC API"""
+    """Example using real market data from layr0_imc API"""
     print("\n\nReal Market Data Example")
     print("=" * 50)
     
@@ -234,7 +234,7 @@ def real_data_example():
         
     except Exception as e:
         print(f"Error in real data example: {e}")
-        print("Make sure you have valid API credentials and layr0-IMC server is running")
+        print("Make sure you have valid API credentials and layr0_imc server is running")
 
 
 def performance_test():
@@ -313,7 +313,7 @@ def crossover_signals_example():
 
 
 if __name__ == "__main__":
-    print("layr0-IMC Technical Indicators Examples")
+    print("layr0_imc Technical Indicators Examples")
     print("=====================================\n")
     
     # Run examples
@@ -325,4 +325,4 @@ if __name__ == "__main__":
     
     print("\n\nAll examples completed!")
     print("Check the code to see how to use each indicator.")
-    print("For more information, visit: https://docs.layr0-IMC.in")
+    print("For more information, visit: https://docs.layr0_imc.in")

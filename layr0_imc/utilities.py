@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC REST API Documentation - Utilities Methods
-    https://docs.layr0-IMC.in
+layr0_imc REST API Documentation - Utilities Methods
+    https://docs.layr0_imc.in
 """
 
 import httpx
@@ -11,7 +11,7 @@ from .base import BaseAPI
 
 class UtilitiesAPI(BaseAPI):
     """
-    Utilities API methods for layr0-IMC.
+    Utilities API methods for layr0_imc.
     Inherits from the BaseAPI class.
     """
 

@@ -1,23 +1,23 @@
 # Python
 
-To install the layr0-IMC Python library, use pip:
+To install the layr0_imc Python library, use pip:
 
 ```bash
-pip install layr0-IMC
+pip install layr0_imc
 ```
 
-### Get the layr0-IMC apikey
+### Get the layr0_imc apikey
 
-Make Sure that your layr0-IMC Application is running. Login to layr0-IMC Application with valid credentials and get the layr0-IMC apikey
+Make Sure that your layr0_imc Application is running. Login to layr0_imc Application with valid credentials and get the layr0_imc apikey
 
-For detailed function parameters refer to the [API Documentation](https://docs.layr0-IMC.in/api-documentation/v1)
+For detailed function parameters refer to the [API Documentation](https://docs.layr0_imc.in/api-documentation/v1)
 
-### Getting Started with layr0-IMC
+### Getting Started with layr0_imc
 
-First, import the `api` class from the layr0-IMC library and initialize it with your API key:
+First, import the `api` class from the layr0_imc library and initialize it with your API key:
 
 ```python
-from layr0-IMC import api
+from layr0_imc import api
 
 # Replace 'your_api_key_here' with your actual API key
 # Specify the host URL with your hosted domain or ngrok domain. 
@@ -26,16 +26,16 @@ client = api(api_key='your_api_key_here', host='http://127.0.0.1:5000')
 
 ```
 
-### Check layr0-IMC Version
+### Check layr0_imc Version
 
 ```python
-import layr0-IMC 
-layr0-IMC.__version__
+import layr0_imc 
+layr0_imc.__version__
 ```
 
 ### Examples
 
-Please refer to the documentation on [order constants](https://docs.layr0-IMC.in/api-documentation/v1/order-constants), and consult the API reference for details on optional parameters
+Please refer to the documentation on [order constants](https://docs.layr0_imc.in/api-documentation/v1/order-constants), and consult the API reference for details on optional parameters
 
 ### PlaceOrder example
 
@@ -1378,7 +1378,7 @@ Instruments **Response**
 
 ```python
 response = client.telegram(
-      username="<layr0-IMC_loginid>",
+      username="<layr0_imc_loginid>",
       message="NIFTY crossed 26000!"
   )
 
@@ -1739,12 +1739,12 @@ Analyzer Toggle Response
 ### LTP Data (Streaming Websocket)
 
 ```python
-from layr0-IMC import api
+from layr0_imc import api
 import time
 
-# Initialize layr0-IMC client
+# Initialize layr0_imc client
 client = api(
-    api_key="your_api_key",                  # Replace with your actual layr0-IMC API key
+    api_key="your_api_key",                  # Replace with your actual layr0_imc API key
     host="http://127.0.0.1:5000",            # REST API host
     ws_url="ws://127.0.0.1:8765"             # WebSocket host
 )
@@ -1776,12 +1776,12 @@ finally:
 ### Quotes (Streaming Websocket)
 
 ```python
-from layr0-IMC import api
+from layr0_imc import api
 import time
 
-# Initialize layr0-IMC client
+# Initialize layr0_imc client
 client = api(
-    api_key="your_api_key",                  # Replace with your actual layr0-IMC API key
+    api_key="your_api_key",                  # Replace with your actual layr0_imc API key
     host="http://127.0.0.1:5000",            # REST API host
     ws_url="ws://127.0.0.1:8765"             # WebSocket host
 )
@@ -1813,12 +1813,12 @@ finally:
 ### Depth (Streaming Websocket)
 
 ```python
-from layr0-IMC import api
+from layr0_imc import api
 import time
 
-# Initialize layr0-IMC client
+# Initialize layr0_imc client
 client = api(
-    api_key="your_api_key",                  # Replace with your actual layr0-IMC API key
+    api_key="your_api_key",                  # Replace with your actual layr0_imc API key
     host="http://127.0.0.1:5000",            # REST API host
     ws_url="ws://127.0.0.1:8765"             # WebSocket host
 )

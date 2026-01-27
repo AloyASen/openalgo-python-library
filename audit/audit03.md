@@ -1,4 +1,4 @@
-### layr0-IMC Indicators Performance Audit — Audit 03
+### layr0_imc Indicators Performance Audit — Audit 03
 
 This audit validates the latest optimization state after Audit 02 and subsequent fixes. It summarizes confirmed improvements, residual hotspots, and any alignment issues between code and documentation.
 
@@ -10,7 +10,7 @@ This audit validates the latest optimization state after Audit 02 and subsequent
 
 ### Still divergent from the ideal state
 - **Incomplete adoption of JIT shim**:
-  - Many modules still use `from numba import jit`. Prefer `from layr0-IMC.numba_shim import jit` (and `njit/prange`) to standardize `nopython`, `fastmath`, and `cache` defaults. Files to sweep: `trend.py`, `oscillators.py`, `volatility.py`, `momentum.py` (partial), and any others.
+  - Many modules still use `from numba import jit`. Prefer `from layr0_imc.numba_shim import jit` (and `njit/prange`) to standardize `nopython`, `fastmath`, and `cache` defaults. Files to sweep: `trend.py`, `oscillators.py`, `volatility.py`, `momentum.py` (partial), and any others.
 
 - **Remaining O(n×period) patterns** (should migrate to `utils` O(n) kernels):
   - `volatility.BollingerBands`: currently re-computes mean/variance inside the window loop. Replace with `utils.sma` + `utils.stdev`.

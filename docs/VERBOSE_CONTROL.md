@@ -1,4 +1,4 @@
-# layr0-IMC WebSocket Verbose Control
+# layr0_imc WebSocket Verbose Control
 
 ## Overview
 
@@ -13,7 +13,7 @@ The `verbose` parameter controls SDK logging output for WebSocket feed operation
 ## Usage
 
 ```python
-from layr0-IMC import api
+from layr0_imc import api
 
 # Silent mode (default) - no SDK output
 client = api(api_key="...", host="...", ws_url="...", verbose=False)
@@ -29,9 +29,9 @@ client = api(api_key="...", host="...", ws_url="...", verbose=2)
 
 ```python
 """
-Test verbose control in layr0-IMC WebSocket Feed
+Test verbose control in layr0_imc WebSocket Feed
 """
-from layr0-IMC import api
+from layr0_imc import api
 import time
 
 # Change this to test different levels: False, True, 1, 2

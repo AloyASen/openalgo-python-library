@@ -5,7 +5,7 @@ NIFTY Futures and Hedged Options Margin Analysis
 This script tests margin requirements for various NIFTY futures and options strategies
 """
 
-from layr0-IMC import api
+from layr0_imc import api
 from datetime import datetime
 import json
 

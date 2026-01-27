@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC Order API Test Examples
+layr0_imc Order API Test Examples
 """
 
-from layr0-IMC import api
+from layr0_imc import api
 import time
 
 def main():

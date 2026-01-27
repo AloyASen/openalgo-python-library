@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC REST API Documentation - Order Methods
-    https://docs.layr0-IMC.in
+layr0_imc REST API Documentation - Order Methods
+    https://docs.layr0_imc.in
 """
 
 import httpx
@@ -9,7 +9,7 @@ from .base import BaseAPI
 
 class OrderAPI(BaseAPI):
     """
-    Order management API methods for layr0-IMC.
+    Order management API methods for layr0_imc.
     Inherits from the BaseAPI class.
     """
 

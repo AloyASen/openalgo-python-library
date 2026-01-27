@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC Technical Indicators - Utility Functions
+layr0_imc Technical Indicators - Utility Functions
 """
 
 import numpy as np
 import pandas as pd
-from layr0-IMC.numba_shim import jit, njit, prange
+from layr0_imc.numba_shim import jit, njit, prange
 from typing import Union, Optional
 
 

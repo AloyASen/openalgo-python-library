@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC REST API Documentation - Data Methods
-    https://docs.layr0-IMC.in
+layr0_imc REST API Documentation - Data Methods
+    https://docs.layr0_imc.in
 """
 
 import httpx
@@ -12,7 +12,7 @@ from .base import BaseAPI
 
 class DataAPI(BaseAPI):
     """
-    Data API methods for layr0-IMC.
+    Data API methods for layr0_imc.
     Inherits from the BaseAPI class.
     """
 
@@ -356,7 +356,7 @@ class DataAPI(BaseAPI):
         """
         Download all trading symbols and instruments with optional exchange filtering.
 
-        This function retrieves instrument data from the layr0-IMC platform and returns
+        This function retrieves instrument data from the layr0_imc platform and returns
         it as a pandas DataFrame. When no exchange is specified, downloads ALL exchanges.
 
         Parameters:
@@ -370,7 +370,7 @@ class DataAPI(BaseAPI):
             - Error: dict with error details
 
         DataFrame Columns:
-        - symbol: layr0-IMC standard symbol
+        - symbol: layr0_imc standard symbol
         - brsymbol: Broker-specific symbol
         - name: Instrument name
         - exchange: Exchange code

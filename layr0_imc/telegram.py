@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC REST API Documentation - Telegram Notification Methods
-    https://docs.layr0-IMC.in
+layr0_imc REST API Documentation - Telegram Notification Methods
+    https://docs.layr0_imc.in
 """
 
 import httpx
@@ -9,7 +9,7 @@ from .base import BaseAPI
 
 class TelegramAPI(BaseAPI):
     """
-    Telegram notification API methods for layr0-IMC.
+    Telegram notification API methods for layr0_imc.
     Inherits from the BaseAPI class.
     """
 
@@ -85,16 +85,16 @@ class TelegramAPI(BaseAPI):
 
         Prerequisites:
         1. Telegram Bot Must Be Running
-           - Start the bot from layr0-IMC Telegram settings
+           - Start the bot from layr0_imc Telegram settings
            - Bot must be active to send alerts
         2. User Must Be Linked
            - User must have linked their account using /link command in Telegram
-           - Username must match your layr0-IMC login username (NOT Telegram username)
+           - Username must match your layr0_imc login username (NOT Telegram username)
         3. Valid API Key
            - API key must be active and valid
 
         Parameters:
-        - username (str): layr0-IMC login username (the username used to login to layr0-IMC app,
+        - username (str): layr0_imc login username (the username used to login to layr0_imc app,
                          NOT Telegram username). Required.
         - message (str): Alert message to send. Required.
                         Supports emojis, markdown, and line breaks (use \\n).
@@ -197,7 +197,7 @@ class TelegramAPI(BaseAPI):
         Error Messages:
         - "Invalid or missing API key": API key is incorrect or expired
         - "User not found or not linked to Telegram": User hasn't linked account OR using wrong username
-          (Use layr0-IMC login username, not Telegram username. Link via /link command)
+          (Use layr0_imc login username, not Telegram username. Link via /link command)
         - "Username and message are required": Missing required fields
         - "Failed to send notification": Bot is not running
 
@@ -206,9 +206,9 @@ class TelegramAPI(BaseAPI):
         - Response: 429 status code if limit exceeded
 
         Notes:
-        - Username is your layr0-IMC login username (case-sensitive), NOT @telegram_handle
+        - Username is your layr0_imc login username (case-sensitive), NOT @telegram_handle
         - User must link account via /link command in Telegram bot first
-        - Bot must be running in layr0-IMC settings to send messages
+        - Bot must be running in layr0_imc settings to send messages
         - Messages are queued if delivery fails temporarily
         - Keep messages under 4096 characters (Telegram limit)
         """

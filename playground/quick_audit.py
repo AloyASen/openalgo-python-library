@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Quick Speed Audit for Key layr0-IMC Technical Indicators
+Quick Speed Audit for Key layr0_imc Technical Indicators
 Tests a representative sample of indicators to verify functionality and performance
 """
 
@@ -11,10 +11,10 @@ import sys
 import os
 from datetime import datetime
 
-# Add the parent directory to Python path to import layr0-IMC
+# Add the parent directory to Python path to import layr0_imc
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from layr0-IMC import ta
+from layr0_imc import ta
 
 def generate_realistic_data(size: int) -> dict:
     """Generate realistic OHLCV data for testing"""
@@ -129,7 +129,7 @@ def main():
 
     }
     
-    print("layr0-IMC Quick Speed Audit")
+    print("layr0_imc Quick Speed Audit")
     print("=" * 50)
     print(f"Testing {len(indicators)} representative indicators")
     print()

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-layr0-IMC Technical Indicators - Statistical Indicators
+layr0_imc Technical Indicators - Statistical Indicators
 """
 
 import numpy as np

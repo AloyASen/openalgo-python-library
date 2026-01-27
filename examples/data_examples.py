@@ -1,8 +1,8 @@
 """
-layr0-IMC Market Data Examples
+layr0_imc Market Data Examples
 """
 
-from layr0-IMC import api
+from layr0_imc import api
 import json
 from datetime import datetime, timedelta
 import pandas as pd

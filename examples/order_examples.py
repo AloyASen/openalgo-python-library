@@ -1,8 +1,8 @@
 """
-layr0-IMC Order Management Examples
+layr0_imc Order Management Examples
 """
 
-from layr0-IMC import api
+from layr0_imc import api
 import json
 
 def print_response(title, response):

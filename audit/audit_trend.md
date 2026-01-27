@@ -1,4 +1,4 @@
-# Trend Indicators Audit (layr0-IMC.indicators.trend)
+# Trend Indicators Audit (layr0_imc.indicators.trend)
 
 _Date_: 2025-06-11 19:30 IST_
 

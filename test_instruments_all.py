@@ -4,7 +4,7 @@
 Test script for instruments() function - Test ALL exchanges download
 """
 
-from layr0-IMC import api
+from layr0_imc import api
 import pandas as pd
 
 # API credentials

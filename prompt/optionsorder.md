@@ -185,14 +185,14 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/optionsorder
 
 #### Live Mode
 
-* **When**: Analyze Mode toggle is OFF in layr0-IMC settings
+* **When**: Analyze Mode toggle is OFF in layr0_imc settings
 * **Behavior**: Places real orders with connected broker
 * **Order ID Format**: Broker's order ID (e.g., "240123000001234")
 * **Response**: No "mode" field present
 
 #### Analyze Mode (Sandbox)
 
-* **When**: Analyze Mode toggle is ON in layr0-IMC settings
+* **When**: Analyze Mode toggle is ON in layr0_imc settings
 * **Behavior**: Places virtual orders in sandbox environment
 * **Order ID Format**: Sandbox ID with "SB-" prefix (e.g., "SB-1234567890")
 * **Response**: Includes "mode": "analyze" field
@@ -356,7 +356,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/optionsorder
 
 | Error Message                       | Cause                           | Solution                     |
 | ----------------------------------- | ------------------------------- | ---------------------------- |
-| Invalid layr0-IMC apikey             | API key is incorrect or expired | Check API key in settings    |
+| Invalid layr0_imc apikey             | API key is incorrect or expired | Check API key in settings    |
 | Option symbol not found             | Calculated strike doesn't exist | Check strike\_int and offset |
 | Quantity must be a positive integer | Invalid quantity value          | Provide valid quantity       |
 | Insufficient funds                  | Not enough margin (Live mode)   | Add funds or reduce quantity |

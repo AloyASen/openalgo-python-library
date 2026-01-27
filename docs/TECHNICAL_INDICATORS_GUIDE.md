@@ -1,4 +1,4 @@
-# layr0-IMC Technical Indicators Documentation
+# layr0_imc Technical Indicators Documentation
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@
 
 ## Introduction
 
-The layr0-IMC Technical Indicators library provides **104 professional-grade technical analysis indicators** with **PERFECT 100% VALIDATION** and intuitive, professional syntax. All indicators are optimized with NumPy and Numba for exceptional performance.
+The layr0_imc Technical Indicators library provides **104 professional-grade technical analysis indicators** with **PERFECT 100% VALIDATION** and intuitive, professional syntax. All indicators are optimized with NumPy and Numba for exceptional performance.
 
 ### 🏆 Key Features - WORLD-CLASS STATUS
 - ✅ **PERFECT 104/104 indicators working** (100% success rate)
@@ -31,13 +31,13 @@ The layr0-IMC Technical Indicators library provides **104 professional-grade tec
 ### Installation
 
 ```bash
-pip install layr0-IMC
+pip install layr0_imc
 ```
 
 ### Basic Usage
 
 ```python
-from layr0-IMC import ta
+from layr0_imc import ta
 import numpy as np
 
 # Example data
@@ -80,7 +80,7 @@ Key characteristics:
 ```python
 import pandas as pd
 import numpy as np
-from layr0-IMC import ta
+from layr0_imc import ta
 
 # From pandas DataFrame - returns pandas Series
 df = pd.read_csv('stock_data.csv')
@@ -2591,7 +2591,7 @@ else:
 
 ```python
 # Example - For SAR values and trend, use SAR class directly
-from layr0-IMC.indicators import SAR
+from layr0_imc.indicators import SAR
 sar_indicator = SAR()
 sar_values, sar_trend = sar_indicator.calculate(high, low, 0.02, 0.2)
 
@@ -3091,7 +3091,7 @@ strong_cross = any_cross & (abs(fast_ma - slow_ma) > 0.5)  # Significant cross o
 
 ## Pine Script Utilities
 
-layr0-IMC includes **6 specialized Pine Script-compatible utility functions** that provide TradingView Pine Script functionality for advanced signal processing and state management.
+layr0_imc includes **6 specialized Pine Script-compatible utility functions** that provide TradingView Pine Script functionality for advanced signal processing and state management.
 
 ### 🆕 NEW: TradingView Pine Script Compatibility
 
@@ -3455,7 +3455,7 @@ rsi = safe_indicator_calculation(ta.rsi, close, 14)
 
 ```python
 import numpy as np
-from layr0-IMC import ta
+from layr0_imc import ta
 
 def trading_system(high, low, close, volume):
     """
@@ -3574,4 +3574,4 @@ if __name__ == "__main__":
 
 ---
 
-This comprehensive guide covers all 100+ technical indicators in the layr0-IMC library with detailed explanations, parameters, and practical examples. Each indicator includes its mathematical foundation, use cases, and code demonstrations to help you implement professional trading strategies.
+This comprehensive guide covers all 100+ technical indicators in the layr0_imc library with detailed explanations, parameters, and practical examples. Each indicator includes its mathematical foundation, use cases, and code demonstrations to help you implement professional trading strategies.

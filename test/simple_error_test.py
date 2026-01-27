@@ -14,7 +14,7 @@ def test_error_handling_methods():
     
     # Test DataAPI error handling
     try:
-        from layr0-IMC.data import DataAPI
+        from layr0_imc.data import DataAPI
         
         # Create a DataAPI instance
         data_api = DataAPI(api_key="test_key")
@@ -32,7 +32,7 @@ def test_error_handling_methods():
     
     # Test OrderAPI error handling
     try:
-        from layr0-IMC.orders import OrderAPI
+        from layr0_imc.orders import OrderAPI
         
         order_api = OrderAPI(api_key="test_key")
         print("✅ OrderAPI imported successfully")
@@ -44,7 +44,7 @@ def test_error_handling_methods():
     
     # Test AccountAPI error handling
     try:
-        from layr0-IMC.account import AccountAPI
+        from layr0_imc.account import AccountAPI
         
         account_api = AccountAPI(api_key="test_key")
         print("✅ AccountAPI imported successfully")
@@ -91,7 +91,7 @@ def test_search_method_signature():
     print("=" * 50)
     
     try:
-        from layr0-IMC.data import DataAPI
+        from layr0_imc.data import DataAPI
         import inspect
         
         data_api = DataAPI(api_key="test_key")
@@ -126,14 +126,14 @@ def test_version_update():
     print("=" * 50)
     
     try:
-        import layr0-IMC
-        print(f"✅ layr0-IMC version: {layr0-IMC.__version__}")
+        import layr0_imc
+        print(f"✅ layr0_imc version: {layr0_imc.__version__}")
         
         # Check if version is 1.0.18
-        if layr0-IMC.__version__ == "1.0.18":
+        if layr0_imc.__version__ == "1.0.18":
             print("✅ Version successfully updated to 1.0.18")
         else:
-            print(f"❌ Expected version 1.0.18, got {layr0-IMC.__version__}")
+            print(f"❌ Expected version 1.0.18, got {layr0_imc.__version__}")
             
     except Exception as e:
         print(f"❌ Error checking version: {e}")
