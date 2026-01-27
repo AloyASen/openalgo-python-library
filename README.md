@@ -20,6 +20,23 @@ client = api(
 )
 ```
 
+## Publishing Automation
+
+If you are a maintainer and want to build and upload the library to PyPI, use the provided automation script:
+
+```bash
+python publish.py
+```
+
+This script will:
+1. Clean previous build artifacts (`dist/`, `build/`).
+2. Install/Update build requirements (`build`, `twine`).
+3. Build the package (`.tar.gz` and `.whl`).
+4. Prompt you to upload to TestPyPI or PyPI.
+
+> [!IMPORTANT]
+> You will need your PyPI API token for the upload step.
+
 ## API Categories
 
 ### 1. Strategy API
