@@ -28,9 +28,9 @@ classifiers = [
 ]
 
 [project.urls]
-Documentation = "https://docs.layr0_imc.in"
-Source = "https://github.com/layr0_imc/layr0_imc-python"
-Tracker = "https://github.com/layr0_imc/layr0_imc-python/issues"
+Documentation = "https://docs.layr0.org"
+Source = "https://github.com/layrZero/layr0-IMC"
+Tracker = "https://github.com/layrZero/layr0-IMC/issues"
 
 [tool.setuptools]
 packages = ["layr0_imc", "layr0_imc.indicators"]

@@ -10,7 +10,7 @@ pip install layr0_imc
 
 Make Sure that your layr0_imc Application is running. Login to layr0_imc Application with valid credentials and get the layr0_imc apikey
 
-For detailed function parameters refer to the [API Documentation](https://docs.layr0_imc.in/api-documentation/v1)
+For detailed function parameters refer to the [API Documentation](https://docs.layr0.org/api-documentation/v1)
 
 ### Getting Started with layr0_imc
 
@@ -35,7 +35,7 @@ layr0_imc.__version__
 
 ### Examples
 
-Please refer to the documentation on [order constants](https://docs.layr0_imc.in/api-documentation/v1/order-constants), and consult the API reference for details on optional parameters
+Please refer to the documentation on [order constants](https://docs.layr0.org/api-documentation/v1/order-constants), and consult the API reference for details on optional parameters
 
 ### PlaceOrder example
 

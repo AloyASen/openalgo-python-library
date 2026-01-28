@@ -132,9 +132,9 @@ def trading_signal(high, low, close, volume):
 
 ## 📞 Support
 
-- **Documentation**: https://docs.layr0_imc.in
-- **GitHub**: https://github.com/layr0_imc/layr0_imc-python
-- **Issues**: https://github.com/layr0_imc/layr0_imc-python/issues
+- **Documentation**: https://docs.layr0.org
+- **GitHub**: https://github.com/layrZero/layr0-IMC
+- **Issues**: https://github.com/layrZero/layr0-IMC/issues
 
 ## Performance
 

@@ -325,4 +325,4 @@ if __name__ == "__main__":
     
     print("\n\nAll examples completed!")
     print("Check the code to see how to use each indicator.")
-    print("For more information, visit: https://docs.layr0_imc.in")
+    print("For more information, visit: https://docs.layr0.org")

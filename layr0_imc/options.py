@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 layr0_imc REST API Documentation - Options Methods
-    https://docs.layr0_imc.in
+    https://docs.layr0.org
 """
 
 import httpx

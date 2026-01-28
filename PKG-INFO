@@ -5,9 +5,9 @@ Summary: A Python library for interacting with layr0_imc's trading APIs with hig
 Home-page: https://layr0_imc.in
 Author: Rajandran R
 Author-email: rajandran@layr0_imc.in
-Project-URL: Documentation, https://docs.layr0_imc.in
-Project-URL: Source, https://github.com/layr0_imc/layr0_imc-python
-Project-URL: Tracker, https://github.com/layr0_imc/layr0_imc-python/issues
+Project-URL: Documentation, https://docs.layr0.org
+Project-URL: Source, https://github.com/layrZero/layr0-IMC
+Project-URL: Tracker, https://github.com/layrZero/layr0-IMC/issues
 Keywords: trading,algorithmic-trading,finance,websocket,market-data,real-time,stock-market,api-wrapper,layr0_imc,market-data,trading-api,stock-trading,technical-analysis,indicators,rsi,macd,sma,ema,bollinger-bands,supertrend,atr,volume-analysis
 Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Developers
